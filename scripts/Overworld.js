@@ -6,7 +6,7 @@ class Overworld {
         this.map = null;
     }
 
-    moveLeft = false;
+    moveLeft = false;//
 
     startGameLoop() {
         const step = () => {
