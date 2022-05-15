@@ -32,25 +32,42 @@ class Overworld {
         step();
     }
 
-    init() {
-        this.map = new OverworldMap(window.OverworldMap.TestRoom);
+    bindHeroPositionCheck() {
+        document.addEventListener("PersonWalkingComplete", e => {
+            if (e.detail.whoId === "hero") {
+                this.map.checkForFootstepCutscene();
+            }
+        })
+    }
+
+    startMap(mapConfig) {
+        this.map = new OverworldMap(mapConfig);
+        this.map.overworld = this;
         this.map.mountObjects();
+    }
+
+    init() {
+        this.startMap(window.OverworldMap.TestRoom);
+
+        this.bindHeroPositionCheck();
 
         this.directionInput = new DirectionInput();
         this.directionInput.init();
 
         this.startGameLoop();
 
-        this.map.startCutscene([
-            { who: "hero", type: "walk", direction: "right" },
-            { who: "hero", type: "walk", direction: "right" },
-            { who: "hero", type: "walk", direction: "right" },
-            { who: "hero", type: "walk", direction: "right" },
-            { who: "hero", type: "walk", direction: "right" },
-            { who: "hero", type: "walk", direction: "right" },
-            { who: "hero", type: "walk", direction: "right" },
-            { who: "hero", type: "walk", direction: "right" },
-            { who: "hero", type: "walk", direction: "right" },
-        ])
+        // this.map.startCutscene([
+        //     { who: "hero", type: "walk", direction: "right" },
+        //     { who: "hero", type: "walk", direction: "right" },
+        //     { who: "hero", type: "walk", direction: "right" },
+        //     { who: "hero", type: "walk", direction: "right" },
+        //     { who: "hero", type: "walk", direction: "right" },
+        //     { who: "hero", type: "walk", direction: "right" },
+        //     { who: "hero", type: "walk", direction: "right" },
+        //     { who: "hero", type: "walk", direction: "right" },
+        //     { who: "hero", type: "walk", direction: "right" },
+
+        //     { type: "textMessage", text: "Who are you!!!???" }
+        // ])
     }
 }
