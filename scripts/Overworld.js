@@ -6,7 +6,7 @@ class Overworld {
         this.map = null;
     }
 
-    moveLeft = false;//
+    moveLeft = false;
 
     startGameLoop() {
         const step = () => {
@@ -18,12 +18,8 @@ class Overworld {
 
             //Draw objects
             Object.values(this.map.gameObjects).forEach(object => {
-                object.update({ arrow: this.directionInput.direction })
-                if (!object.isPlayer) {
-                    object.sprite.draw(this.ctx, 32, 25);
-                } else {
-                    object.sprite.draw(this.ctx, 50, 37);
-                }
+                object.update({ arrow: this.directionInput.direction });
+                object.sprite.draw(this.ctx);
             })
 
             requestAnimationFrame(() => {
