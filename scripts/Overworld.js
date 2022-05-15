@@ -18,7 +18,10 @@ class Overworld {
 
             //Draw objects
             Object.values(this.map.gameObjects).forEach(object => {
-                object.update({ arrow: this.directionInput.direction });
+                object.update({
+                    arrow: this.directionInput.direction,
+                    map: this.map
+                });
                 object.sprite.draw(this.ctx);
             })
 
@@ -31,10 +34,23 @@ class Overworld {
 
     init() {
         this.map = new OverworldMap(window.OverworldMap.TestRoom);
+        this.map.mountObjects();
 
         this.directionInput = new DirectionInput();
         this.directionInput.init();
 
         this.startGameLoop();
+
+        this.map.startCutscene([
+            { who: "hero", type: "walk", direction: "right" },
+            { who: "hero", type: "walk", direction: "right" },
+            { who: "hero", type: "walk", direction: "right" },
+            { who: "hero", type: "walk", direction: "right" },
+            { who: "hero", type: "walk", direction: "right" },
+            { who: "hero", type: "walk", direction: "right" },
+            { who: "hero", type: "walk", direction: "right" },
+            { who: "hero", type: "walk", direction: "right" },
+            { who: "hero", type: "walk", direction: "right" },
+        ])
     }
 }
