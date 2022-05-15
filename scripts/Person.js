@@ -3,8 +3,6 @@ class Person extends GameObject {
         super(config);
         this.movingProgressRemaining = 0;
 
-        this.isPlayer = config.isPlayer || false;
-
         this.directionUpdate = {
             "left": ["x", -1],
             "right": ["x", 1],
@@ -12,31 +10,41 @@ class Person extends GameObject {
     }
 
     update(state) {
-        this.updatePosition();
-        this.updateSprite(state);
+        if (this.movingProgressRemaining > 0) {
+            this.updatePosition();
+        } else {
+            // Move if key pressed
+            if (state.arrow) {
+                this.startBehavior(state, {
+                    type: "walk",
+                    direction: state.arrow
+                });
+            }
+            this.updateSprite(state);
+        }
+    }
 
-        if (this.movingProgressRemaining === 0 && state.arrow && this.isPlayer) {
-            this.direction = state.arrow;
+    startBehavior(state, behavior) {
+        this.direction = behavior.direction;
+
+        if (behavior.type === "walk") {
             this.movingProgressRemaining = 5;
         }
     }
 
     updatePosition() {
-        if (this.movingProgressRemaining > 0) {
-            const [property, change] = this.directionUpdate[this.direction];
-            this[property] += change;
-            this.movingProgressRemaining -= 1;
-        }
+
+        const [property, change] = this.directionUpdate[this.direction];
+        this[property] += change;
+        this.movingProgressRemaining -= 1;
+
     }
 
     updateSprite(state) {
-        if (this.movingProgressRemaining === 0 && !state.arrow && this.isPlayer) {
-            this.sprite.setAnimation("hero_idle-NoFight");
-            return;
-        }
-
         if (this.movingProgressRemaining > 0) {
             this.sprite.setAnimation("hero_walk-right");
+            return;
         }
+        this.sprite.setAnimation("hero_idle-NoFight");
     }
 }
