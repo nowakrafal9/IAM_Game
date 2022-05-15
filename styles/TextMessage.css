@@ -4,7 +4,7 @@
     right: 0;
     bottom: 0;
 
-    height: 36px;
+    height: 30px;
     padding: 4px;
 
     background: var(--menu-background);
@@ -15,6 +15,14 @@
 .TextMessage_p {
     margin: 0;
     font-size: 12px;
+}
+
+.TextMessage span {
+    opacity: 0;
+}
+
+.TextMessage span.revealed {
+    opacity: 1;
 }
 
 .TextMessage_button {

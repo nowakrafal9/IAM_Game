@@ -56,18 +56,9 @@ class Overworld {
 
         this.startGameLoop();
 
-        // this.map.startCutscene([
-        //     { who: "hero", type: "walk", direction: "right" },
-        //     { who: "hero", type: "walk", direction: "right" },
-        //     { who: "hero", type: "walk", direction: "right" },
-        //     { who: "hero", type: "walk", direction: "right" },
-        //     { who: "hero", type: "walk", direction: "right" },
-        //     { who: "hero", type: "walk", direction: "right" },
-        //     { who: "hero", type: "walk", direction: "right" },
-        //     { who: "hero", type: "walk", direction: "right" },
-        //     { who: "hero", type: "walk", direction: "right" },
-
-        //     { type: "textMessage", text: "Who are you!!!???" }
-        // ])
+        this.map.startCutscene([
+            // { type: "changeMap", map: "Room2" }
+            { type: "textMessage", text: "Łot heppend" }
+        ])
     }
 }

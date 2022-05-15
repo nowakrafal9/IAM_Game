@@ -7,8 +7,8 @@ class Person extends GameObject {
         this.objectType == config.objectType;
 
         this.directionUpdate = {
-            "left": ["x", -1],
-            "right": ["x", 1],
+            "left": ["x", -2],
+            "right": ["x", 2],
         }
     }
 
