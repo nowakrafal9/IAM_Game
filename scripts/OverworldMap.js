@@ -17,14 +17,10 @@ window.OverworldMap = {
         gameObjects: {
             hero: new Person({
                 src: "./assets/characters/adventurer.png",
-                isPlayer: true,
-                x: 0, y: 110
+                objectType: "Player",
+                x: 0, y: 110,
+                sizeX: 50, sizeY: 37
             }),
-            enemy1: new EnemySlime({
-                src: "./assets/enemies/slime.png",
-                isEnemy: true,
-                x: 300, y: 123
-            }),
-        }
+        },
     }
 }

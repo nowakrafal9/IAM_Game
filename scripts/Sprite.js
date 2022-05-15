@@ -7,6 +7,9 @@ class Sprite {
             this.isLoaded = true;
         }
 
+        this.sizeX = config.sizeX || 0;
+        this.sizeY = config.sizeY || 0;
+
         //Animation and inital state
         this.animations = config.animations || {
             "hero_idle-NoFight": [[0, 0], [1, 0], [2, 0], [3, 0]],
@@ -16,6 +19,7 @@ class Sprite {
             "slime_idle": [[0, 0], [1, 0], [2, 0], [3, 0]],
             "slime_death": [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2]]
         }
+
         this.currentAnimation = config.currentAnimation || "hero_idle-NoFight";
         this.currentAnimationFrame = 0;
 
@@ -52,7 +56,7 @@ class Sprite {
         }
     }
 
-    draw(ctx, sizeX, sizeY) {
+    draw(ctx) {
         const x = this.gameObject.x;
         const y = this.gameObject.y;
 
@@ -60,10 +64,10 @@ class Sprite {
 
         this.isLoaded && ctx.drawImage(
             this.image,
-            frameX * sizeX, frameY * sizeY,
-            sizeX, sizeY,
+            frameX * this.sizeX, frameY * this.sizeY,
+            this.sizeX, this.sizeY,
             x, y,
-            sizeX, sizeY
+            this.sizeX, this.sizeY
         )
 
         this.updateAnimationProgress();
