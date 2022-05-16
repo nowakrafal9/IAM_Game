@@ -78,6 +78,7 @@ class OverworldEvent {
     }
 
     battle(resolve) {
+        console.log(this.map.gameObjects);
         const battle = new Battle({
             onComplete: () => {
                 resolve();

@@ -103,3 +103,23 @@
     border: 1px solid #A48465;
     margin: 0;
 }
+
+.Combatant_status {
+    position: absolute;
+    font-size: 5px;
+    left: 47px;
+    bottom: -3px;
+    padding-left: 2px;
+    padding-right: 2px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    margin: 0;
+}
+
+.Combatant_status[data-status="positive"] {
+    color: green;
+}
+
+.Combatant_status[data-status="negative"] {
+    background: red;
+}

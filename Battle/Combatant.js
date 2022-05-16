@@ -16,6 +16,10 @@ class Combatant {
         return this.xp / this.maxXp * 100;
     }
 
+    get isActive() {
+        return this.battle.activeCombatants[this.team] === this.id;
+    }
+
     createElement() {
         this.hudElement = document.createElement("div");
         this.hudElement.classList.add("Combatant");
