@@ -23,7 +23,7 @@ class Sprite {
         this.currentAnimation = config.currentAnimation || "hero_idle-NoFight";
         this.currentAnimationFrame = 0;
 
-        this.animationFrameLimit = config.animationFrameLimit || 16;
+        this.animationFrameLimit = config.animationFrameLimit || 10;
         this.animationFrameProgress = this.animationFrameLimit;
 
         //Reference the game object

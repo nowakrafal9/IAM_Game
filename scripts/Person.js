@@ -35,6 +35,11 @@ class Person extends GameObject {
             this.updateSprite(state);
         }
 
+        if (behavior.type === "long_walk") {
+            this.movingProgressRemaining = 30;
+            this.updateSprite(state);
+        }
+
         if (behavior.type === "stand") {
             this.isStanding = true;
             setTimeout(() => {

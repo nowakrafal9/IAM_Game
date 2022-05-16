@@ -60,15 +60,19 @@ window.OverworldMap = {
             npc1: new Person({
                 src: "./assets/characters/adventurer.png",
                 objectType: "HumanNPC",
-                x: 70, y: 110,
+                x: 340, y: 110,
                 sizeX: 50, sizeY: 37,
             }),
         },
         cutsceneSpaces: {
-            "150, 110": [
+            "120, 110": [
                 {
                     events: [
-                        { type: "textMessage", text: "Event started" }
+                        { who: "npc1", type: "long_walk", direction: "left" },
+                        { type: "textMessage", text: "A wild enemy appears!!!" },
+                        { who: "npc1", type: "long_walk", direction: "left" },
+                        { who: "npc1", type: "long_walk", direction: "left" },
+                        { type: "battle" },
                     ]
                 }
             ],

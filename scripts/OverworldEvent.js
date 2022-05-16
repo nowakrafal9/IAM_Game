@@ -41,6 +41,24 @@ class OverworldEvent {
         document.addEventListener("PersonWalkingComplete", completeHandler)
     }
 
+    long_walk(resolve) {
+        const who = this.map.gameObjects[this.event.who];
+        who.startBehavior({
+            map: this.map
+        }, {
+            type: "long_walk",
+            direction: this.event.direction,
+        })
+
+        const completeHandler = e => {
+            if (e.detail.whoId === this.event.who) {
+                document.removeEventListener("PersonWalkingComplete", completeHandler);
+                resolve();
+            }
+        }
+        document.addEventListener("PersonWalkingComplete", completeHandler)
+    }
+
     textMessage(resolve) {
         const message = new TextMessage({
             text: this.event.text,
@@ -57,6 +75,16 @@ class OverworldEvent {
 
             sceneTransition.fadeOut();
         });
+    }
+
+    battle(resolve) {
+        const battle = new Battle({
+            onComplete: () => {
+                resolve();
+            }
+        })
+
+        battle.init(document.querySelector(".game-container"));
     }
 
     init() {
