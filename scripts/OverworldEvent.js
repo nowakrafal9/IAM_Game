@@ -16,11 +16,11 @@ class OverworldEvent {
 
         const completeHandler = e => {
             if (e.detail.whoId === this.event.who) {
-                document.removeEventListener("PersonStandComplete", completeHandler);
+                document.removeEventListener("StandComplete", completeHandler);
                 resolve();
             }
         }
-        document.addEventListener("PersonStandComplete", completeHandler)
+        document.addEventListener("StandComplete", completeHandler)
     }
 
     walk(resolve) {
@@ -34,11 +34,11 @@ class OverworldEvent {
 
         const completeHandler = e => {
             if (e.detail.whoId === this.event.who) {
-                document.removeEventListener("PersonWalkingComplete", completeHandler);
+                document.removeEventListener("WalkingComplete", completeHandler);
                 resolve();
             }
         }
-        document.addEventListener("PersonWalkingComplete", completeHandler)
+        document.addEventListener("WalkingComplete", completeHandler)
     }
 
     long_walk(resolve) {
@@ -52,11 +52,11 @@ class OverworldEvent {
 
         const completeHandler = e => {
             if (e.detail.whoId === this.event.who) {
-                document.removeEventListener("PersonWalkingComplete", completeHandler);
+                document.removeEventListener("WalkingComplete", completeHandler);
                 resolve();
             }
         }
-        document.addEventListener("PersonWalkingComplete", completeHandler)
+        document.addEventListener("WalkingComplete", completeHandler)
     }
 
     textMessage(resolve) {
@@ -78,8 +78,12 @@ class OverworldEvent {
     }
 
     battle(resolve) {
-        console.log(this.map.gameObjects);
+        Object.keys(this.map.gameObjects).forEach(key => {
+            this.map.gameObjects[key].isInBattle = true;
+        });
+
         const battle = new Battle({
+            mapObjects: this.map.gameObjects,
             onComplete: () => {
                 resolve();
             }

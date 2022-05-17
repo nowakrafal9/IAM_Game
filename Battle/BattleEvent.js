@@ -27,7 +27,7 @@ class BattleEvent {
             })
         }
 
-        await utils.wait(600);
+        await utils.wait(100);
 
         resolve();
     }
@@ -41,6 +41,11 @@ class BattleEvent {
             }
         })
         menu.init(this.battle.element);
+    }
+
+    animation(resolve) {
+        const fn = BattleAnimations[this.event.animation];
+        fn(this.event, resolve);
     }
 
     init(resolve) {

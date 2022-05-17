@@ -1,11 +1,11 @@
 class GameObject {
     constructor(config) {
-        this.id = config.id || null;
+        this.id = null;
         this.x = config.x || 0;
         this.y = config.y || 0;
         this.sizeX = config.sizeX;
         this.sizeY = config.sizeY;
-        this.direction = config.direction || "right"
+        this.direction = config.direction || "right";
         this.objectType = config.objectType || null;
 
         this.sprite = new Sprite({

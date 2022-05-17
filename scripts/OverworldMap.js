@@ -54,18 +54,18 @@ window.OverworldMap = {
             hero: new Person({
                 src: "./assets/characters/adventurer.png",
                 objectType: "Player",
-                x: 0, y: 110,
+                x: 0, y: 111,
                 sizeX: 50, sizeY: 37,
             }),
-            npc1: new Person({
-                src: "./assets/characters/adventurer.png",
-                objectType: "HumanNPC",
-                x: 340, y: 110,
-                sizeX: 50, sizeY: 37,
+            npc1: new EnemySlime({
+                src: "./assets/characters/slime.png",
+                objectType: "SlimeNPC",
+                x: 360, y: 123,
+                sizeX: 32, sizeY: 25,
             }),
         },
         cutsceneSpaces: {
-            "120, 110": [
+            "120, 111": [
                 {
                     events: [
                         { who: "npc1", type: "long_walk", direction: "left" },
@@ -76,7 +76,7 @@ window.OverworldMap = {
                     ]
                 }
             ],
-            "340, 110": [
+            "340, 111": [
                 {
                     events: [
                         { type: "changeMap", map: "Room2" }

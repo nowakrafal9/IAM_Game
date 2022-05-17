@@ -33,7 +33,7 @@ class Overworld {
     }
 
     bindHeroPositionCheck() {
-        document.addEventListener("PersonWalkingComplete", e => {
+        document.addEventListener("WalkingComplete", e => {
             if (e.detail.whoId === "hero") {
                 this.map.checkForFootstepCutscene();
             }

@@ -3,8 +3,9 @@ window.Actions = {
         name: "Simple attack",
         success: [
             { type: "textMessage", text: "{CASTER} uses Simple Attack on {TARGET}!" },
-            // { type: "animation", animation: "attack" },
+            { type: "animation", animation: "attack" },
             { type: "stateChange", damage: 10 },
+            { type: "animation", animation: "hit" },
         ]
     }
 }

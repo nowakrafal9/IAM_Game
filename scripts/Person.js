@@ -3,8 +3,10 @@ class Person extends GameObject {
         super(config);
         this.movingProgressRemaining = 0;
         this.isStanding = false;
+        this.isInBattle = false;
+        this.isMakingTurnAction = false;
 
-        this.objectType == config.objectType;
+        this.objectType = config.objectType;
 
         this.directionUpdate = {
             "left": ["x", -2],
@@ -43,7 +45,7 @@ class Person extends GameObject {
         if (behavior.type === "stand") {
             this.isStanding = true;
             setTimeout(() => {
-                utils.emitEvent("PersonStandComplete", {
+                utils.emitEvent("StandComplete", {
                     whoId: this.id
                 })
                 this.isStanding = false;
@@ -57,7 +59,7 @@ class Person extends GameObject {
         this.movingProgressRemaining -= 1;
 
         if (this.movingProgressRemaining === 0) {
-            utils.emitEvent("PersonWalkingComplete", {
+            utils.emitEvent("WalkingComplete", {
                 whoId: this.id
             })
         }
@@ -65,9 +67,16 @@ class Person extends GameObject {
 
     updateSprite(state) {
         if (this.movingProgressRemaining > 0) {
-            this.sprite.setAnimation("hero_walk-right");
+            this.sprite.setAnimation("walk-right");
             return;
         }
-        this.sprite.setAnimation("hero_idle-NoFight");
+
+        if (!this.isMakingTurnAction) {
+            if (!this.isInBattle) {
+                this.sprite.setAnimation("idle-NoFight");
+            } else {
+                this.sprite.setAnimation("idle-Fight");
+            }
+        }
     }
 }

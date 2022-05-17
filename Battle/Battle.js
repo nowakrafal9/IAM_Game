@@ -1,8 +1,11 @@
 class Battle {
-    constructor() {
+    constructor(config) {
+        this.mapObjects = config.mapObjects;
+
         this.combatants = {
-            "player1": new Combatant({
+            "hero": new Combatant({
                 ...Players.p001,
+                objectRef: config.mapObjects["hero"],
                 team: "player",
                 hp: 50,
                 maxHp: 50,
@@ -11,8 +14,9 @@ class Battle {
                 level: 1,
                 status: null,
             }, this),
-            "enemy1": new Combatant({
+            "npc1": new Combatant({
                 ...Enemies.s001,
+                objectRef: config.mapObjects["npc1"],
                 team: "enemy",
                 hp: 50,
                 maxHp: 50,
@@ -24,8 +28,8 @@ class Battle {
         }
 
         this.activeCombatants = {
-            player: "player1",
-            enemy: "enemy1",
+            player: "hero",
+            enemy: "npc1",
         }
     }
 

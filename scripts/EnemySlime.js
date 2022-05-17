@@ -3,57 +3,72 @@ class EnemySlime extends GameObject {
         super(config);
 
         this.movingProgressRemaining = 0;
-        this.isInFight = false;
-        this.battleStarted = false;
+        this.isStanding = false;
+        this.isInBattle = false;
+        this.isMakingTurnAction = false;
 
         this.directionUpdate = {
-            "left": ["x", -1],
-            "right": ["x", 1],
+            "left": ["x", -2],
+            "right": ["x", 2],
         }
     }
 
     update(state) {
-        this.updatePosition();
-        this.updateSprite();
+        if (this.movingProgressRemaining > 0) {
+            this.updatePosition();
+        } else {
+            this.updateSprite(state);
+        }
+    }
+
+    startBehavior(state, behavior) {
+        this.direction = behavior.direction;
+
+        if (behavior.type === "walk") {
+            this.movingProgressRemaining = 5;
+            this.updateSprite(state);
+        }
+
+        if (behavior.type === "long_walk") {
+            this.movingProgressRemaining = 30;
+            this.updateSprite(state);
+        }
+
+        if (behavior.type === "stand") {
+            this.isStanding = true;
+            setTimeout(() => {
+                utils.emitEvent("StandComplete", {
+                    whoId: this.id
+                })
+                this.isStanding = false;
+            }, behavior.time)
+        }
     }
 
     updatePosition() {
-        if (this.movingProgressRemaining > 0) {
-            const [property, change] = this.directionUpdate["left"];
-            this[property] += change;
-            this.movingProgressRemaining -= 1;
+        const [property, change] = this.directionUpdate[this.direction];
+        this[property] += change;
+        this.movingProgressRemaining -= 1;
+
+        if (this.movingProgressRemaining === 0) {
+            utils.emitEvent("WalkingComplete", {
+                whoId: this.id
+            })
         }
     }
 
-    updateSprite() {
-        if (this.movingProgressRemaining === 0) {
-            this.sprite.setAnimation("slime_idle");
+    updateSprite(state) {
+        if (this.movingProgressRemaining > 0) {
+            this.sprite.setAnimation("walk-left");
             return;
         }
 
-        if (this.movingProgressRemaining > 0) {
-            this.sprite.setAnimation("slime_idle");
+        if (!this.isMakingTurnAction) {
+            if (!this.isInBattle) {
+                this.sprite.setAnimation("idle-NoFight");
+            } else {
+                this.sprite.setAnimation("idle-Fight");
+            }
         }
-    }
-
-    startFight() {
-        this.isInFight = true;
-
-        if (!this.battleStarted) {
-            this.moveToFight();
-        }
-    }
-
-    moveToFight() {
-        this.movingProgressRemaining = 100;
-
-        if (this.movingProgressRemaining > 0) {
-            this.movingProgressRemaining -= 1;
-            this.sprite.setAnimation("slime_idle");
-        } else {
-            this.sprite.setAnimation("slime_idle");
-        }
-
-        this.battleStarted = true;
     }
 }

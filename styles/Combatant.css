@@ -54,10 +54,10 @@
     white-space: nowrap;
     background: var(--menu-font-color);
     color: #fff;
-    font-size: 5px;
+    font-size: 0.3rem;
+    /* font-weight: 700; */
 
-    padding-left: 2px;
-    padding-right: 2px;
+    padding: 0.1em;
     margin: 0;
 }
 
@@ -91,7 +91,7 @@
 
 .Combatant_level {
     position: absolute;
-    font-size: 12px;
+    font-size: 0.5rem;
     right: 2px;
     top: -1px;
     width: 17px;
