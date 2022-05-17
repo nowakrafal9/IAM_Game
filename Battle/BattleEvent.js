@@ -20,10 +20,38 @@ class BattleEvent {
     }
 
     async stateChange(resolve) {
-        const { caster, target, damage } = this.event;
+        const { caster, target, damage, recover, status, action } = this.event;
+        let who = this.event.onCaster ? caster : target;
+        if (action.targetType === "friendly") {
+            who = caster;
+        }
+
         if (damage) {
             target.update({
                 hp: target.hp - damage
+            })
+        }
+
+        if (recover) {
+            let newHp = who.hp + recover;
+
+            if (newHp > who.maxHp) {
+                newHp = who.maxHp;
+            }
+
+            who.update({
+                hp: newHp
+            })
+        }
+
+        if (status) {
+            who.update({
+                status: { ...status }
+            })
+        }
+        if (status === null) {
+            who.update({
+                status: null
             })
         }
 

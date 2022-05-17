@@ -20,7 +20,9 @@ class TurnCycle {
             enemy
         })
 
-        const resultingEvents = submission.action.success;
+        // const resultingEvents = caster.getReplacedEvents(submission.action.success);
+        // const resultingEvents = submission.action.success;
+        const resultingEvents = submission.action.failure;
 
         for (let i = 0; i < resultingEvents.length; i++) {
             const event = {
@@ -31,6 +33,25 @@ class TurnCycle {
                 target: submission.target,
             }
             await this.onNewEvent(event);
+        }
+
+        //Positive status effects after turn
+        const postEvents = caster.getPostEevents();
+        for (let i = 0; i < postEvents.length; i++) {
+            const event = {
+                ...postEvents[i],
+                submission,
+                action: submission.action,
+                caster,
+                target: submission.target,
+            }
+            await this.onNewEvent(event);
+        }
+
+        //Check for status expire
+        const expiredEvent = caster.statusTurnDecrement();
+        if (expiredEvent) {
+            await this.onNewEvent(expiredEvent);
         }
 
         this.currentTeam = this.currentTeam === "player" ? "enemy" : "player";

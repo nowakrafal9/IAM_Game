@@ -57,6 +57,55 @@ class Combatant {
         this.xpFills.forEach(rect => rect.style.width = `${this.xpPercent}%`);
 
         this.hudElement.querySelector(".Combatant_level").innerText = this.level;
+
+        const statusElement = this.hudElement.querySelector(".Combatant_status");
+        if (this.status) {
+            statusElement.innerText = this.status.type;
+            statusElement.style.display = "block";
+        } else {
+            statusElement.innerText = "";
+            statusElement.style.display = "none";
+        }
+    }
+
+    getReplacedEvents(originalEvents) {
+        if (this.status?.type === "blindness" && utils.randomFromArray([true, false, false])) {
+            return [
+                { type: "textMessage", text: `${this.name} missess!` }
+            ]
+        }
+
+        return originalEvents;
+    }
+
+    getPostEevents() {
+        if (this.status?.type === "regeneration") {
+            return [
+                { type: "textMessage", text: "I feel power!!!" },
+                { type: "stateChange", recover: 5, onCaster: true }
+            ]
+        }
+
+        return [];
+    }
+
+    statusTurnDecrement() {
+        if (this.status?.expiresIn > 0) {
+            this.status.expiresIn -= 1;
+            if (this.status.expiresIn === 0) {
+                let statusName = this.status.type;
+
+                this.update({
+                    status: null
+                })
+                return {
+                    type: "textMessage",
+                    text: statusName + " expired!"
+                }
+            }
+        }
+
+        return null;
     }
 
     init(container) {

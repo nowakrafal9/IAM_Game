@@ -18,13 +18,13 @@
 }
 
 .Combatant[data-team="player"] {
-    top: 50px;
-    left: 80px;
+    top: 25px;
+    left: 25px;
 }
 
 .Combatant[data-team="enemy"] {
-    top: 50px;
-    right: 80px;
+    top: 25px;
+    right: 25px;
 }
 
 .Combatant_character_crop {
@@ -106,9 +106,9 @@
 
 .Combatant_status {
     position: absolute;
-    font-size: 5px;
-    left: 47px;
-    bottom: -3px;
+    font-size: 0.15rem;
+    left: 15px;
+    bottom: -4px;
     padding-left: 2px;
     padding-right: 2px;
     background: rgba(0, 0, 0, 0.8);

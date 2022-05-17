@@ -7,7 +7,7 @@ class Battle {
                 ...Players.p001,
                 objectRef: config.mapObjects["hero"],
                 team: "player",
-                hp: 50,
+                hp: 30,
                 maxHp: 50,
                 xp: 10,
                 maxXp: 100,
@@ -36,15 +36,6 @@ class Battle {
     createElement() {
         this.element = document.createElement("div");
         this.element.classList.add("Battle");
-        // this.element.innerHTML = (` 
-        //     <div class = "Battle_hero">
-        //         <img src = "${'/assets/characters/adventurer.png'}" alt = "Hero" />
-        //     </div>
-
-        //     <div class = "Battle_enemy">
-        //         <img src = "${'/assets/characters/slime.png'}" alt = "Enemy" />
-        //     </div>
-        // `)
     }
 
     init(container) {
