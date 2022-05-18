@@ -57,7 +57,7 @@ window.OverworldMap = {
                 x: 0, y: 111,
                 sizeX: 50, sizeY: 37,
             }),
-            npc1: new EnemySlime({
+            Slime: new EnemySlime({
                 src: "./assets/characters/slime.png",
                 objectType: "SlimeNPC",
                 x: 360, y: 123,
@@ -68,11 +68,14 @@ window.OverworldMap = {
             "120, 111": [
                 {
                     events: [
-                        { who: "npc1", type: "long_walk", direction: "left" },
+                        { who: "Slime", type: "long_walk", direction: "left" },
                         { type: "textMessage", text: "A wild enemy appears!!!" },
-                        { who: "npc1", type: "long_walk", direction: "left" },
-                        { who: "npc1", type: "long_walk", direction: "left" },
-                        { type: "battle" },
+                        { who: "Slime", type: "long_walk", direction: "left" },
+                        { who: "Slime", type: "long_walk", direction: "left" },
+                        { type: "battle", enemyId: "Slime" },
+                        { who: "hero", type: "walk", direction: "right" },
+                        { who: "hero", type: "walk", direction: "right" },
+                        { who: "hero", type: "walk", direction: "right" },
                     ]
                 }
             ],

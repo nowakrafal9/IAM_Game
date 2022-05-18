@@ -1,9 +1,10 @@
 class TurnCycle {
-    constructor({ battle, onNewEvent }) {
+    constructor({ battle, onNewEvent, onWinner }) {
         this.battle = battle;
         this.onNewEvent = onNewEvent;
+        this.onWinner = onWinner;
 
-        this.currentTeam = "player"; // "enemy"
+        this.currentTeam = "enemy"; // "enemy"
     }
 
     async turn() {
@@ -21,6 +22,8 @@ class TurnCycle {
         })
 
         if (submission.instanceId) {
+            this.battle.usedInstanceIds[submission.instanceId] = true;
+
             this.battle.items = this.battle.items.filter(i => i.instanceId !== submission.instanceId)
         }
 
@@ -44,6 +47,22 @@ class TurnCycle {
             await this.onNewEvent({
                 type: "textMessage", text: `${submission.target.name} meets its end!`
             })
+
+            if (submission.target.team === "enemy") {
+                const playerActiveId = this.battle.activeCombatants.player;
+                const xp = submission.target.givesXp;
+
+                await this.onNewEvent({
+                    type: "textMessage",
+                    text: `Gained ${xp} XP!`
+                })
+
+                await this.onNewEvent({
+                    type: "giveXp",
+                    xp,
+                    combatant: this.battle.combatants[playerActiveId]
+                })
+            }
         }
 
         const winner = this.getWinningSide();
@@ -52,6 +71,7 @@ class TurnCycle {
                 type: "textMessage",
                 text: `${caster.name} wins the battle!`
             })
+            this.onWinner(winner);
             return;
         }
 

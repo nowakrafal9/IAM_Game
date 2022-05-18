@@ -69,6 +69,30 @@ class BattleEvent {
         menu.init(this.battle.element);
     }
 
+    giveXp(resolve) {
+        let amount = this.event.xp;
+        const { combatant } = this.event;
+
+        const step = () => {
+            if (amount > 0) {
+                amount -= 1;
+                combatant.xp += 1;
+
+                if (combatant.xp >= combatant.maxXp) {
+                    combatant.xp = combatant.maxXp - combatant.xp;
+                    combatant.level += 1;
+                    combatant.maxXp = Math.floor(combatant.maxXp * 1.25);
+                }
+
+                combatant.update();
+                requestAnimationFrame(step);
+                return;
+            }
+            resolve();
+        }
+        requestAnimationFrame(step);
+    }
+
     animation(resolve) {
         const fn = BattleAnimations[this.event.animation];
         fn(this.event, resolve);

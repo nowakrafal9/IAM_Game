@@ -78,11 +78,13 @@ class OverworldEvent {
     }
 
     battle(resolve) {
+        //Setting animation type to battle one
         Object.keys(this.map.gameObjects).forEach(key => {
             this.map.gameObjects[key].isInBattle = true;
         });
 
         const battle = new Battle({
+            enemy: EnemiesStats[this.event.enemyId],
             mapObjects: this.map.gameObjects,
             onComplete: () => {
                 resolve();

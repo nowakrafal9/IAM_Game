@@ -1,42 +1,49 @@
 class Battle {
     constructor(config) {
         this.mapObjects = config.mapObjects;
+        this.enemy = config.enemy;
+        this.onComplete = config.onComplete;
 
-        this.combatants = {
-            "hero": new Combatant({
-                ...Players.p001,
-                objectRef: config.mapObjects["hero"],
-                team: "player",
-                hp: 50,
-                maxHp: 50,
-                xp: 10,
-                maxXp: 100,
-                level: 1,
-                status: null,
-                isPlayerControlled: true
-            }, this),
-            "npc1": new Combatant({
-                ...Enemies.s001,
-                objectRef: config.mapObjects["npc1"],
-                team: "enemy",
-                hp: 50,
-                maxHp: 50,
-                xp: 30,
-                maxXp: 100,
-                level: 1,
-                status: null,
-            }, this),
-        }
+        this.combatants = {};
+        this.items = [];
 
         this.activeCombatants = {
-            player: "hero",
-            enemy: "npc1",
+            player: null,
+            enemy: null,
         }
 
-        this.items = [
-            { actionId: "item_healthPotionSmall", instanceId: "p1", team: "player" },
-            { actionId: "item_healthPotionSmall", instanceId: "p2", team: "player" },
-        ]
+        this.addCombatant("hero", "player", window.player.playerInstance["hero"]);
+        this.addCombatant(this.enemy.name, "enemy", this.enemy.enemyInstance);
+
+        //Add player items
+        window.player.items.forEach(item => {
+            this.items.push({
+                ...item,
+                team: "player"
+            })
+        })
+
+        this.usedInstanceIds = {};
+    }
+
+    addCombatant(id, team, config) {
+        if (team === "enemy") {
+            this.combatants[id] = new Combatant({
+                ...Enemies[config.id],
+                ...config,
+                team,
+                objectRef: this.mapObjects[id]
+            }, this)
+        } else {
+            this.combatants[id] = new Combatant({
+                ...Players[config.id],
+                ...config,
+                team,
+                objectRef: this.mapObjects["hero"]
+            }, this)
+        }
+
+        this.activeCombatants[team] = this.activeCombatants[team] || id;
     }
 
     createElement() {
@@ -61,6 +68,28 @@ class Battle {
                     const battleEvent = new BattleEvent(event, this);
                     battleEvent.init(resolve);
                 })
+            },
+            onWinner: winner => {
+                Object.keys(this.combatants).forEach(key => {
+                    let combatant = this.combatants[key];
+                    combatant.objectRef.isInBattle = false;
+                })
+
+                const playerState = window.player;
+                const combatant = this.combatants["hero"];
+
+                playerState.playerInstance.hero.hp = combatant.hp;
+                playerState.playerInstance.hero.xp = combatant.xp;
+                playerState.playerInstance.hero.maxXp = combatant.maxXp;
+                playerState.playerInstance.hero.level = combatant.level;
+
+                //Remove used items from player state
+                playerState.items = playerState.items.filter(item => {
+                    return !this.usedInstanceIds[item.instanceId]
+                });
+
+                this.element.remove();
+                this.onComplete();
             }
         })
 
