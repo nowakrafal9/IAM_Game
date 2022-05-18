@@ -1,6 +1,7 @@
 window.Actions = {
     damage1: {
-        name: "Simple attack",
+        name: "Fast attack",
+        description: "Attack as swift as a wind",
         success: [
             { type: "textMessage", text: "{CASTER} uses {ACTION} on {TARGET}!" },
             { type: "animation", animation: "attack" },

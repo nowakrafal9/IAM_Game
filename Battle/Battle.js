@@ -13,6 +13,7 @@ class Battle {
                 maxXp: 100,
                 level: 1,
                 status: null,
+                isPlayerControlled: true
             }, this),
             "npc1": new Combatant({
                 ...Enemies.s001,

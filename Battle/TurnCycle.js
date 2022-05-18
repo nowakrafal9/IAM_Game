@@ -59,10 +59,10 @@ class TurnCycle {
     }
 
     async init() {
-        await this.onNewEvent({
-            type: "textMessage",
-            text: "The battle has started"
-        })
+        // await this.onNewEvent({
+        //     type: "textMessage",
+        //     text: "The battle has started"
+        // })
 
         this.turn();
     }
