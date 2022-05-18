@@ -68,15 +68,15 @@ class Combatant {
         }
     }
 
-    getReplacedEvents(originalEvents) {
-        if (this.status?.type === "blindness" && utils.randomFromArray([true, false, false])) {
-            return [
-                { type: "textMessage", text: `${this.name} missess!` }
-            ]
-        }
+    // getReplacedEvents(originalEvents) {
+    //     if (this.status?.type === "stun" && utils.randomFromArray([true, false, false])) {
+    //         return [
+    //             { type: "textMessage", text: `${this.name} missess!` }
+    //         ]
+    //     }
 
-        return originalEvents;
-    }
+    //     return originalEvents;
+    // }
 
     getPostEevents() {
         if (this.status?.type === "regeneration") {

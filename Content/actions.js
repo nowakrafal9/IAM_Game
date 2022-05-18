@@ -28,14 +28,14 @@ window.Actions = {
             },
         ]
     },
-    blindnessStatus: {
-        name: "Blindness",
+    stunStatus: {
+        name: "Stun",
         success: [
             { type: "textMessage", text: "{CASTER} uses {ACTION}" },
             {
                 type: "stateChange",
                 status: {
-                    type: "blindness",
+                    type: "stun",
                     expiresIn: 2
                 }
             },

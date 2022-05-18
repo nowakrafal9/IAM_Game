@@ -7,7 +7,7 @@ class Battle {
                 ...Players.p001,
                 objectRef: config.mapObjects["hero"],
                 team: "player",
-                hp: 30,
+                hp: 50,
                 maxHp: 50,
                 xp: 10,
                 maxXp: 100,

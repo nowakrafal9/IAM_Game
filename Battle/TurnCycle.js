@@ -21,8 +21,8 @@ class TurnCycle {
         })
 
         // const resultingEvents = caster.getReplacedEvents(submission.action.success);
-        // const resultingEvents = submission.action.success;
-        const resultingEvents = submission.action.failure;
+        const resultingEvents = submission.action.success;
+        // const resultingEvents = submission.action.failure;
 
         for (let i = 0; i < resultingEvents.length; i++) {
             const event = {
