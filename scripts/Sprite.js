@@ -24,6 +24,9 @@ class Sprite {
                 "fastAttack": [[0, 7], [1, 7], [2, 7], [3, 7]],
 
                 "hurt": [[4, 8], [5, 8], [6, 8]],
+
+                "death": [[0, 9], [1, 9], [2, 9], [3, 9], [4, 9], [5, 9]],
+                "stay-dead": [[5, 9]]
             }
         }
         if (config.gameObject instanceof EnemySlime) {
@@ -36,6 +39,9 @@ class Sprite {
                 "fastAttack": [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]],
 
                 "hurt": [[4, 1], [5, 1], [6, 1], [7, 1], [0, 2]],
+
+                "death": [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2]],
+                "stay-dead": [[4, 2]]
             }
         }
 

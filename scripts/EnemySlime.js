@@ -6,6 +6,7 @@ class EnemySlime extends GameObject {
         this.isStanding = false;
         this.isInBattle = false;
         this.isMakingTurnAction = false;
+        this.isDead = false;
 
         this.directionUpdate = {
             "left": ["x", -2],
@@ -58,17 +59,21 @@ class EnemySlime extends GameObject {
     }
 
     updateSprite(state) {
-        if (this.movingProgressRemaining > 0) {
-            this.sprite.setAnimation("walk-left");
-            return;
-        }
-
-        if (!this.isMakingTurnAction) {
-            if (!this.isInBattle) {
-                this.sprite.setAnimation("idle-NoFight");
-            } else {
-                this.sprite.setAnimation("idle-Fight");
+        if (!this.isDead) {
+            if (this.movingProgressRemaining > 0) {
+                this.sprite.setAnimation("walk-left");
+                return;
             }
+
+            if (!this.isMakingTurnAction) {
+                if (!this.isInBattle) {
+                    this.sprite.setAnimation("idle-NoFight");
+                } else {
+                    this.sprite.setAnimation("idle-Fight");
+                }
+            }
+        } else {
+            this.sprite.setAnimation("stay-dead");
         }
     }
 }

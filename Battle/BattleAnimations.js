@@ -20,6 +20,14 @@ window.BattleAnimations = {
             event.target.objectRef.isMakingTurnAction = false;
         })
 
+        if (event.target.hp <= 0) {
+            event.target.objectRef.sprite.setTurnAnimation("death");
+
+            document.addEventListener("AnimationComplete", () => {
+                event.target.objectRef.isDead = true;
+            })
+        }
+
         await utils.wait(500);
 
         onComplete();

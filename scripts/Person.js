@@ -5,7 +5,7 @@ class Person extends GameObject {
         this.isStanding = false;
         this.isInBattle = false;
         this.isMakingTurnAction = false;
-
+        this.isDead = false;
         this.objectType = config.objectType;
 
         this.directionUpdate = {
@@ -66,17 +66,21 @@ class Person extends GameObject {
     }
 
     updateSprite(state) {
-        if (this.movingProgressRemaining > 0) {
-            this.sprite.setAnimation("walk-right");
-            return;
-        }
-
-        if (!this.isMakingTurnAction) {
-            if (!this.isInBattle) {
-                this.sprite.setAnimation("idle-NoFight");
-            } else {
-                this.sprite.setAnimation("idle-Fight");
+        if (!this.isDead) {
+            if (this.movingProgressRemaining > 0) {
+                this.sprite.setAnimation("walk-right");
+                return;
             }
+
+            if (!this.isMakingTurnAction) {
+                if (!this.isInBattle) {
+                    this.sprite.setAnimation("idle-NoFight");
+                } else {
+                    this.sprite.setAnimation("idle-Fight");
+                }
+            }
+        } else {
+            this.sprite.setAnimation("stay-dead");
         }
     }
 }
