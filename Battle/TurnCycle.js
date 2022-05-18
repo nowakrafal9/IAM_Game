@@ -42,8 +42,17 @@ class TurnCycle {
         const targetDead = submission.target.hp <= 0;
         if (targetDead) {
             await this.onNewEvent({
-                type: "textMessage", text: `${submission.target.name} meets its end`
+                type: "textMessage", text: `${submission.target.name} meets its end!`
             })
+        }
+
+        const winner = this.getWinningSide();
+        if (winner) {
+            await this.onNewEvent({
+                type: "textMessage",
+                text: `${caster.name} wins the battle!`
+            })
+            return;
         }
 
         //Positive status effects after turn
@@ -67,6 +76,19 @@ class TurnCycle {
 
         this.currentTeam = this.currentTeam === "player" ? "enemy" : "player";
         this.turn();
+    }
+
+    getWinningSide() {
+        let aliveTeam = {};
+        Object.values(this.battle.combatants).forEach(c => {
+            if (c.hp > 0) {
+                aliveTeam[c.team] = true;
+            }
+        })
+        if (!aliveTeam["player"]) { return "enemy" }
+        if (!aliveTeam["enemy"]) { return "player" }
+
+        return null;
     }
 
     async init() {
