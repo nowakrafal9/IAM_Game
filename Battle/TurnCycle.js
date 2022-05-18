@@ -20,6 +20,10 @@ class TurnCycle {
             enemy
         })
 
+        if (submission.instanceId) {
+            this.battle.items = this.battle.items.filter(i => i.instanceId !== submission.instanceId)
+        }
+
         // const resultingEvents = caster.getReplacedEvents(submission.action.success);
         const resultingEvents = submission.action.success;
         // const resultingEvents = submission.action.failure;
@@ -33,6 +37,13 @@ class TurnCycle {
                 target: submission.target,
             }
             await this.onNewEvent(event);
+        }
+
+        const targetDead = submission.target.hp <= 0;
+        if (targetDead) {
+            await this.onNewEvent({
+                type: "textMessage", text: `${submission.target.name} meets its end`
+            })
         }
 
         //Positive status effects after turn

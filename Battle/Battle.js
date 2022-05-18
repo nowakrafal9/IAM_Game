@@ -32,6 +32,11 @@ class Battle {
             player: "hero",
             enemy: "npc1",
         }
+
+        this.items = [
+            { actionId: "item_healthPotionSmall", instanceId: "p1", team: "player" },
+            { actionId: "item_healthPotionSmall", instanceId: "p2", team: "player" },
+        ]
     }
 
     createElement() {

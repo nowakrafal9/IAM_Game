@@ -1,4 +1,5 @@
 window.Actions = {
+    // Attack types
     damage1: {
         name: "Fast attack",
         description: "Attack as swift as a wind",
@@ -15,6 +16,7 @@ window.Actions = {
         ]
     },
 
+    // Statuses
     regenerationStatus: {
         name: "Regeneration",
         targetType: "friendly",
@@ -42,5 +44,17 @@ window.Actions = {
             },
             { type: "textMessage", text: "{TARGET} can't see too well" },
         ]
+    },
+
+    // Items
+    item_healthPotionSmall: {
+        name: "Recovery potion(S)",
+        description: "Small potion giving 10 hp",
+        targetType: "friendly",
+        success: [
+            { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
+            { type: "stateChange", recover: 10 },
+            { type: "textMessage", text: "{CASTER} recovers 10 hp!" },
+        ],
     }
 }
