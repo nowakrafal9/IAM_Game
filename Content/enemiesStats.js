@@ -3,7 +3,7 @@ window.EnemiesStats = {
         name: "Slime",
         enemyInstance: {
             id: "s001",
-            maxHp: 10,
+            maxHp: 5,
             level: 1,
         }
     }

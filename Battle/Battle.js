@@ -12,8 +12,17 @@ class Battle {
             enemy: null,
         }
 
-        this.addCombatant("hero", "player", window.player.playerInstance["hero"]);
-        this.addCombatant(this.enemy.name, "enemy", this.enemy.enemyInstance);
+        this.playerInstance = window.player.playerInstance["hero"];
+        this.enemyInstance = this.enemy.enemyInstance;
+
+        this.enemyInstance = this.mapObjects[this.enemy.name].scaleEnemy({
+            enemyInstance: this.enemyInstance,
+            heroLevel: this.playerInstance.level
+        });
+
+        // this.scaleEnemy();
+        this.addCombatant("hero", "player", this.playerInstance);
+        this.addCombatant(this.enemy.name, "enemy", this.enemyInstance);
 
         //Add player items
         window.player.items.forEach(item => {
@@ -25,6 +34,13 @@ class Battle {
 
         this.usedInstanceIds = {};
     }
+
+    // async scaleEnemy() {
+    //     this.enemyInstance = await this.mapObjects[this.enemy.name].scaleEnemy({
+    //         enemyInstance: this.enemyInstance,
+    //         heroLevel: this.playerInstance.level
+    //     });
+    // }
 
     addCombatant(id, team, config) {
         if (team === "enemy") {

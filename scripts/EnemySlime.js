@@ -76,4 +76,22 @@ class EnemySlime extends GameObject {
             this.sprite.setAnimation("stay-dead");
         }
     }
+
+    scaleEnemy(config) {
+        // console.log(config);
+        this.enemyInstance = config.enemyInstance;
+        this.heroLevel = config.heroLevel;
+
+        if (this.heroLevel === 1) {
+            this.enemyInstance.level = Math.floor(Math.random() * 2) + this.heroLevel;
+        } else {
+            this.heroLevel -= 1;
+            this.enemyInstance.level = Math.floor(Math.random() * 3) + this.heroLevel;
+        }
+
+        this.enemyInstance.maxHp += 5 * this.enemyInstance.level;
+
+        // console.log(config);
+        return this.enemyInstance;
+    }
 }
