@@ -83,7 +83,6 @@ class OverworldEvent {
             this.map.gameObjects[key].isInBattle = true;
         });
 
-
         let EnemyInstance = Object.assign({}, EnemiesStats);
 
         const battle = new Battle({

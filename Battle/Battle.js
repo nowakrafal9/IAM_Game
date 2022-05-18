@@ -16,11 +16,11 @@ class Battle {
         this.enemyInstance = this.enemy.enemyInstance;
 
         this.enemyInstance = this.mapObjects[this.enemy.name].scaleEnemy({
-            enemyInstance: this.enemyInstance,
+            enemyInstance: Object.assign({}, this.enemyInstance),
             heroLevel: this.playerInstance.level
         });
+        console.log(this.enemyInstance.maxHp);
 
-        // this.scaleEnemy();
         this.addCombatant("hero", "player", this.playerInstance);
         this.addCombatant(this.enemy.name, "enemy", this.enemyInstance);
 
@@ -34,13 +34,6 @@ class Battle {
 
         this.usedInstanceIds = {};
     }
-
-    // async scaleEnemy() {
-    //     this.enemyInstance = await this.mapObjects[this.enemy.name].scaleEnemy({
-    //         enemyInstance: this.enemyInstance,
-    //         heroLevel: this.playerInstance.level
-    //     });
-    // }
 
     addCombatant(id, team, config) {
         if (team === "enemy") {

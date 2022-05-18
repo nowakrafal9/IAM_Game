@@ -78,20 +78,19 @@ class EnemySlime extends GameObject {
     }
 
     scaleEnemy(config) {
-        // console.log(config);
-        this.enemyInstance = config.enemyInstance;
-        this.heroLevel = config.heroLevel;
+        let enemyInstance = config.enemyInstance;
+        let heroLevel = config.heroLevel;
 
-        if (this.heroLevel === 1) {
-            this.enemyInstance.level = Math.floor(Math.random() * 2) + this.heroLevel;
+        if (heroLevel === 1) {
+            enemyInstance.level = Math.floor(Math.random() * 2) + heroLevel;
         } else {
-            this.heroLevel -= 1;
-            this.enemyInstance.level = Math.floor(Math.random() * 3) + this.heroLevel;
+            heroLevel -= 1;
+            enemyInstance.level = Math.floor(Math.random() * 3) + heroLevel;
         }
 
-        this.enemyInstance.maxHp += 5 * this.enemyInstance.level;
+        // this.enemyInstance.maxHp = 5 + 5 * this.enemyInstance.level;
+        enemyInstance.maxHp += 5 * enemyInstance.level;
 
-        // console.log(config);
-        return this.enemyInstance;
+        return enemyInstance;
     }
 }
