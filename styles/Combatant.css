@@ -27,24 +27,11 @@
     right: 25px;
 }
 
-.Combatant_character_crop {
-    position: absolute;
-    bottom: 1px;
-    left: 3px;
-    width: 22px;
-    height: 12px;
-    overflow: hidden;
-}
-
 .Combatant_character {
     display: block;
     position: absolute;
     left: -11px;
     bottom: -7px;
-}
-
-.Battle .Combatant_character_crop {
-    display: none;
 }
 
 .Combatant_name {
@@ -65,8 +52,9 @@
     position: absolute;
     left: 4px;
     top: -1px;
-    width: 13px;
     height: 13px;
+    width: 13px;
+    object-fit: cover;
 }
 
 .Combatant_life-container {
