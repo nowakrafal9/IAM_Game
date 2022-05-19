@@ -32,6 +32,16 @@ class Overworld {
         step();
     }
 
+    bindActionInput() {
+        new KeyPressListener("Escape", () => {
+            if (!this.map.isCutscenePlaying) {
+                this.map.startCutscene([
+                    { type: "pause" }
+                ])
+            }
+        })
+    }
+
     bindHeroPositionCheck() {
         document.addEventListener("WalkingComplete", e => {
             if (e.detail.whoId === "hero") {
@@ -52,6 +62,7 @@ class Overworld {
 
         this.startMap(window.OverworldMap.TestRoom);
 
+        this.bindActionInput();
         this.bindHeroPositionCheck();
 
         this.directionInput = new DirectionInput();
