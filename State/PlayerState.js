@@ -16,6 +16,9 @@ class PlayerState {
             { actionId: "item_healthPotionSmall", instanceId: "item1" },
             { actionId: "item_healthPotionSmall", instanceId: "item2" },
         ]
+        this.flags = {
+            START_BATTLE: true
+        }
     }
 }
 
