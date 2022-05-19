@@ -82,7 +82,6 @@ class OverworldEvent {
         Object.keys(this.map.gameObjects).forEach(key => {
             this.map.gameObjects[key].isInBattle = true;
         });
-
         let EnemyInstance = Object.assign({}, EnemiesStats);
 
         const battle = new Battle({
@@ -94,6 +93,20 @@ class OverworldEvent {
         })
 
         battle.init(document.querySelector(".game-container"));
+    }
+
+    modifyPlayerFlag(resolve) {
+        window.player.flags[this.event.flag] = this.event.flagValue;
+        resolve();
+    }
+
+    pause(resolve) {
+        const menu = new PauseMenu({
+            onComplete: () => {
+                resolve();
+            }
+        })
+        menu.init(document.querySelector(".game-container"));
     }
 
     init() {

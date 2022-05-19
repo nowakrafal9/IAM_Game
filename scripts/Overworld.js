@@ -52,8 +52,19 @@ class Overworld {
 
     startMap(mapConfig) {
         this.map = new OverworldMap(mapConfig);
+
         this.map.overworld = this;
+        this.map.gameObjects = {
+            hero: generateCharacters.generateHero(),
+        }
+        this.map.gameObjects = Object.assign(this.map.gameObjects, generateCharacters.generateEnemy())
+        this.map.cutsceneSpaces["120, 111"][0].events = generateEvents.generateBattle(this.map.gameObjects["enemy"]);
+
         this.map.mountObjects();
+    }
+
+    generateEnemies() {
+
     }
 
     init() {
@@ -69,11 +80,5 @@ class Overworld {
         this.directionInput.init();
 
         this.startGameLoop();
-
-        // this.map.startCutscene([
-        //     { type: "battle" }
-        //     //     // { type: "changeMap", map: "Room2" }
-        //     //     // { type: "textMessage", text: "Łot heppend" }
-        // ])
     }
 }

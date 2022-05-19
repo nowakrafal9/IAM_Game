@@ -42,7 +42,13 @@ class OverworldMap {
         const match = this.cutsceneSpaces[`${hero.x}, ${hero.y}`];
 
         if (!this.isCutscenePlaying && match) {
-            this.startCutscene(match[0].events);
+            const relevantEvent = match[0];
+
+            let startEvent = (relevantEvent.required || []).every(flag => {
+                return player.flags[flag] || false;
+            })
+
+            startEvent && this.startCutscene(relevantEvent.events);
         }
     }
 }
@@ -50,39 +56,19 @@ class OverworldMap {
 window.OverworldMap = {
     TestRoom: {
         src: "./assets/maps/test.png",
-        gameObjects: {
-            hero: new Person({
-                src: "./assets/characters/adventurer.png",
-                objectType: "Player",
-                x: 0, y: 111,
-                sizeX: 50, sizeY: 37,
-            }),
-            Slime: new EnemySlime({
-                src: "./assets/characters/slime.png",
-                objectType: "SlimeNPC",
-                x: 360, y: 123,
-                sizeX: 32, sizeY: 25,
-            }),
-        },
+        gameObjects: {},
         cutsceneSpaces: {
             "120, 111": [
                 {
-                    events: [
-                        { who: "Slime", type: "long_walk", direction: "left" },
-                        { type: "textMessage", text: "A wild enemy appears!!!" },
-                        { who: "Slime", type: "long_walk", direction: "left" },
-                        { who: "Slime", type: "long_walk", direction: "left" },
-                        { type: "battle", enemyId: "Slime" },
-                        { who: "hero", type: "walk", direction: "right" },
-                        { who: "hero", type: "walk", direction: "right" },
-                        { who: "hero", type: "walk", direction: "right" },
-                    ]
+                    required: ["START_BATTLE"],
+                    events: []
                 }
             ],
             "340, 111": [
                 {
                     events: [
-                        { type: "changeMap", map: "Room2" }
+                        { type: "modifyPlayerFlag", flag: "START_BATTLE", flagValue: true },
+                        { type: "changeMap", map: "Room2" },
                     ]
                 }
             ]
@@ -90,19 +76,22 @@ window.OverworldMap = {
     },
     Room2: {
         src: "./assets/maps/test.png",
-        gameObjects: {
-            hero: new Person({
-                src: "./assets/characters/adventurer.png",
-                objectType: "Player",
-                x: -40, y: 110,
-                sizeX: 50, sizeY: 37,
-            }),
-            npc1: new Person({
-                src: "./assets/characters/adventurer.png",
-                objectType: "HumanNPC",
-                x: 220, y: 110,
-                sizeX: 50, sizeY: 37,
-            }),
-        },
-    }
+        gameObjects: {},
+        cutsceneSpaces: {
+            "120, 111": [
+                {
+                    required: ["START_BATTLE"],
+                    events: []
+                }
+            ],
+            "340, 111": [
+                {
+                    events: [
+                        { type: "modifyPlayerFlag", flag: "START_BATTLE", flagValue: true },
+                        { type: "changeMap", map: "TestRoom" },
+                    ]
+                }
+            ]
+        }
+    },
 }

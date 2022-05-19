@@ -15,7 +15,7 @@ class Battle {
         this.playerInstance = window.player.playerInstance["hero"];
         this.enemyInstance = this.enemy.enemyInstance;
 
-        this.enemyInstance = this.mapObjects[this.enemy.name].scaleEnemy({
+        this.enemyInstance = this.mapObjects["enemy"].scaleEnemy({
             enemyInstance: Object.assign({}, this.enemyInstance),
             heroLevel: this.playerInstance.level
         });
@@ -43,7 +43,7 @@ class Battle {
                 ...Enemies[config.id],
                 ...config,
                 team,
-                objectRef: this.mapObjects[id]
+                objectRef: this.mapObjects["enemy"]
             }, this)
         } else {
             this.combatants[id] = new Combatant({
