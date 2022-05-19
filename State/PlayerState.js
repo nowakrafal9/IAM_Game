@@ -3,9 +3,9 @@ class PlayerState {
         this.playerInstance = {
             "hero": {
                 id: "p001",
-                hp: 999,
-                maxHp: 999,
-                xp: 90,
+                hp: 100,
+                maxHp: 100,
+                xp: 0,
                 maxXp: 100,
                 level: 1,
                 status: null,
@@ -19,6 +19,7 @@ class PlayerState {
         this.flags = {
             START_BATTLE: true
         }
+        this.currentRoom = 1;
     }
 }
 

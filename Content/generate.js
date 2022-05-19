@@ -8,10 +8,13 @@ const generateCharacters = {
         })
     },
 
-    generateEnemy() {
-        let randomEnemy = Math.floor(Math.random() * 2);
+    generateEnemy(enemyType = null) {
+        let randomEnemy = null;
+        if (enemyType === null) {
+            randomEnemy = Math.floor(Math.random() * 2);
+        }
 
-        if (randomEnemy == 0) {
+        if (randomEnemy == 0 || enemyType === "Slime") {
             return {
                 enemy: new EnemySlime({
                     src: "./assets/characters/slime.png",
@@ -21,7 +24,7 @@ const generateCharacters = {
                 })
             }
         }
-        if (randomEnemy == 1) {
+        if (randomEnemy == 1 || enemyType === "SlimeBoss") {
             return {
                 enemy: new EnemySlime({
                     src: "./assets/characters/slimeBoss.png",

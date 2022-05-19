@@ -6,8 +6,6 @@ class Overworld {
         this.map = null;
     }
 
-    moveLeft = false;
-
     startGameLoop() {
         const step = () => {
             //Clear canvas
@@ -50,28 +48,48 @@ class Overworld {
         })
     }
 
-    startMap(mapConfig) {
+    startMap(mapConfig, initalState = null) {
         this.map = new OverworldMap(mapConfig);
-
         this.map.overworld = this;
+
         this.map.gameObjects = {
             hero: generateCharacters.generateHero(),
         }
-        this.map.gameObjects = Object.assign(this.map.gameObjects, generateCharacters.generateEnemy())
+        this.map.gameObjects = Object.assign(this.map.gameObjects, generateCharacters.generateEnemy(initalState?.enemyInfo[1]))
         this.map.cutsceneSpaces["120, 111"][0].events = generateEvents.generateBattle(this.map.gameObjects["enemy"]);
+
+        if (initalState) {
+            this.map.gameObjects["hero"].x = initalState.heroPos[0];
+            this.map.gameObjects["hero"].y = initalState.heroPos[1];
+
+            this.map.gameObjects["enemy"].x = initalState.enemyPos[0];
+            this.map.gameObjects["enemy"].y = initalState.enemyPos[1];
+            this.map.gameObjects["enemy"].isDead = initalState.enemyIsDead;
+        }
 
         this.map.mountObjects();
     }
 
-    generateEnemies() {
-
-    }
-
     init() {
+        this.progress = new Progress();
+
+        let initalState = null;
+        const saveFile = this.progress.getSaveFile();
+        if (saveFile) {
+            this.progress.load();
+            initalState = {
+                cutsceneSpaces: this.progress.cutsceneSpaces,
+                enemyInfo: this.progress.enemyInfo,
+                enemyPos: this.progress.enemyPos,
+                enemyIsDead: this.progress.enemyIsDead,
+                heroPos: this.progress.heroPos,
+            }
+        }
+
         this.hud = new Hud();
         this.hud.init(document.querySelector(".game-container"));
 
-        this.startMap(window.OverworldMap.TestRoom);
+        this.startMap(window.OverworldMap.TestRoom, initalState);
 
         this.bindActionInput();
         this.bindHeroPositionCheck();

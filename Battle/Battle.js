@@ -1,9 +1,11 @@
 class Battle {
     constructor(config) {
-        this.mapObjects = config.mapObjects;
+        this.map = config.map;
+        this.mapObjects = this.map.gameObjects;
         this.enemy = config.enemy;
         this.onComplete = config.onComplete;
-
+        this.progress = config.progress;
+        console.log(config);
         this.combatants = {};
         this.items = [];
 
@@ -89,7 +91,18 @@ class Battle {
                 const playerState = window.player;
                 const combatant = this.combatants["hero"];
 
+                //Manage save files after battle
+                if (winner === "enemy") {
+                    //Delete save if battle lost
+                    this.progress.deleteSave();
+                } else {
+                    //Save if battle won
+                    this.progress.save(this.map);
+                }
+
+
                 playerState.playerInstance.hero.hp = combatant.hp;
+                playerState.playerInstance.hero.maxHp = combatant.maxHp;
                 playerState.playerInstance.hero.xp = combatant.xp;
                 playerState.playerInstance.hero.maxXp = combatant.maxXp;
                 playerState.playerInstance.hero.level = combatant.level;

@@ -75,6 +75,7 @@ class OverworldEvent {
 
             sceneTransition.fadeOut();
         });
+        player.currentRoom += 1;
     }
 
     battle(resolve) {
@@ -85,8 +86,9 @@ class OverworldEvent {
         let EnemyInstance = Object.assign({}, EnemiesStats);
 
         const battle = new Battle({
+            progress: this.map.overworld.progress,
             enemy: EnemyInstance[this.event.enemyId],
-            mapObjects: this.map.gameObjects,
+            map: this.map,
             onComplete: () => {
                 resolve();
             }
@@ -102,6 +104,8 @@ class OverworldEvent {
 
     pause(resolve) {
         const menu = new PauseMenu({
+            map: this.map,
+            progress: this.map.overworld.progress,
             onComplete: () => {
                 resolve();
             }

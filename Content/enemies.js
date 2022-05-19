@@ -10,7 +10,7 @@ window.Enemies = {
         actions: ["damage1"]
     },
     "sBoss": {
-        name: "Slime boss",
+        name: "Slime Boss",
         type: EnemyTypes.slime,
         icon: "./assets/characters/images/slimeBoss_image.png",
         actions: ["damage1"]
