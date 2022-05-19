@@ -23,6 +23,7 @@ class BattleEvent {
         const { caster, target, damage, recover, status, action } = this.event;
         let who = this.event.onCaster ? caster : target;
 
+        //TODO: damage scaling from level
         if (damage) {
             target.update({
                 hp: target.hp - damage

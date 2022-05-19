@@ -3,8 +3,7 @@ class GameObject {
         this.id = null;
         this.x = config.x || 0;
         this.y = config.y || 0;
-        this.sizeX = config.sizeX;
-        this.sizeY = config.sizeY;
+
         this.direction = config.direction || "right";
         this.objectType = config.objectType || null;
 
@@ -12,8 +11,8 @@ class GameObject {
             gameObject: this,
             src: config.src,
 
-            sizeX: this.sizeX,
-            sizeY: this.sizeY,
+            sizeX: config.sizeX,
+            sizeY: config.sizeY,
         });
 
         this.behaviorLoop = config.behaviorLoop || [];

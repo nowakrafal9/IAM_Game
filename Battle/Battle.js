@@ -19,7 +19,6 @@ class Battle {
             enemyInstance: Object.assign({}, this.enemyInstance),
             heroLevel: this.playerInstance.level
         });
-        console.log(this.enemyInstance.maxHp);
 
         this.addCombatant("hero", "player", this.playerInstance);
         this.addCombatant(this.enemy.name, "enemy", this.enemyInstance);
@@ -33,6 +32,9 @@ class Battle {
         })
 
         this.usedInstanceIds = {};
+
+        this.hudElement = document.getElementById("Hud");
+        this.hudElement.classList.add("HideHud");
     }
 
     addCombatant(id, team, config) {
@@ -96,6 +98,10 @@ class Battle {
                 playerState.items = playerState.items.filter(item => {
                     return !this.usedInstanceIds[item.instanceId]
                 });
+
+                utils.emitEvent("PlayerStateUpdated");
+
+                this.hudElement.classList.remove("HideHud");
 
                 this.element.remove();
                 this.onComplete();
