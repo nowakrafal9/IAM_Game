@@ -12,11 +12,12 @@ class PauseMenu {
                     label: "Save",
                     description: "Save your progress",
                     handler: () => {
-                        this.progress.save(this.map)
+                        this.progress.save(this.map);
+                        this.close();
                     }
                 },
                 {
-                    label: "Close",
+                    label: "Close menu",
                     description: "Close the pause menu",
                     handler: () => {
                         this.close();

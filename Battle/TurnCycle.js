@@ -5,6 +5,7 @@ class TurnCycle {
         this.onWinner = onWinner;
 
         this.currentTeam = "enemy"; // "enemy"
+        console.log(battle);
     }
 
     async turn() {

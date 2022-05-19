@@ -70,12 +70,19 @@ class Overworld {
         this.map.mountObjects();
     }
 
-    init() {
+    async init() {
+        const container = document.querySelector(".game-container");
+
         this.progress = new Progress();
 
+        this.titleScreen = new TitleScreen({
+            progress: this.progress
+        });
+        const useSaveFile = await this.titleScreen.init(container);
+
         let initalState = null;
-        const saveFile = this.progress.getSaveFile();
-        if (saveFile) {
+        // const saveFile = this.progress.getSaveFile();
+        if (useSaveFile) {
             this.progress.load();
             initalState = {
                 cutsceneSpaces: this.progress.cutsceneSpaces,

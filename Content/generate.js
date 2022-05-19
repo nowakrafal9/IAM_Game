@@ -45,7 +45,6 @@ const generateEvents = {
             { who: "enemy", type: "long_walk", direction: "left" },
             { who: "enemy", type: "long_walk", direction: "left" },
             { type: "battle", enemyId: who.objectType },
-            { type: "modifyPlayerFlag", flag: "START_BATTLE", flagValue: false },
         ];
 
         return events;

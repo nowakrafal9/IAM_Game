@@ -5,7 +5,7 @@ class Battle {
         this.enemy = config.enemy;
         this.onComplete = config.onComplete;
         this.progress = config.progress;
-        console.log(config);
+
         this.combatants = {};
         this.items = [];
 
@@ -83,6 +83,8 @@ class Battle {
                 })
             },
             onWinner: winner => {
+                player.flags["START_BATTLE"] = false;
+
                 Object.keys(this.combatants).forEach(key => {
                     let combatant = this.combatants[key];
                     combatant.objectRef.isInBattle = false;
@@ -93,13 +95,12 @@ class Battle {
 
                 //Manage save files after battle
                 if (winner === "enemy") {
-                    //Delete save if battle lost
+                    //Show title screen if dead
+                    // this.map.overworld.init();
                     this.progress.deleteSave();
                 } else {
-                    //Save if battle won
                     this.progress.save(this.map);
                 }
-
 
                 playerState.playerInstance.hero.hp = combatant.hp;
                 playerState.playerInstance.hero.maxHp = combatant.maxHp;
