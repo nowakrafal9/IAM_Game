@@ -3,9 +3,9 @@ window.EnemiesStats = {
         name: "Slime",
         enemyInstance: {
             id: "s001",
-            maxHp: 10,
-            attack: 6,
-            defense: 9,
+            maxHp: 5,
+            attack: 2,
+            defense: 3,
             level: 1,
             killXp: 10,
         }
@@ -14,10 +14,10 @@ window.EnemiesStats = {
         name: "Slime boss",
         enemyInstance: {
             id: "sBoss",
-            maxHp: 40,
-            attack: 12,
-            defense: 18,
-            level: 10,
+            maxHp: 20,
+            attack: 4,
+            defense: 4,
+            level: 1,
             killXp: 10,
         }
     }

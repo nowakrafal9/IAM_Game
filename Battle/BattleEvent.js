@@ -20,7 +20,7 @@ class BattleEvent {
     }
     15
     async stateChange(resolve) {
-        const { caster, target, damage, recover, status } = this.event;
+        const { caster, target, damage, statusDamage, recover, status } = this.event;
         let who = this.event.onCaster ? caster : target;
 
         if (damage) {
@@ -37,6 +37,12 @@ class BattleEvent {
 
             who.update({
                 hp: who.hp - damageDealt
+            })
+        }
+
+        if (statusDamage) {
+            who.update({
+                hp: who.hp - statusDamage
             })
         }
 

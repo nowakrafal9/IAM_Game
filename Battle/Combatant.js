@@ -88,11 +88,11 @@ class Combatant {
         }
 
         if (this.status?.type === "poison") {
-            let damageDealt = (Math.floor(this.maxHp * 0.8));
+            let damageDealt = (Math.floor(this.maxHp * 0.16));
 
             return [
                 { type: "textMessage", text: "{CASTER} is poisoned!" },
-                { type: "stateChange", damage: damageDealt, onCaster: true },
+                { type: "stateChange", statusDamage: damageDealt, onCaster: true },
                 { type: "animation", animation: "death" }
             ];
         }

@@ -88,8 +88,9 @@ class EnemySlime extends GameObject {
             enemyInstance.level = Math.floor(Math.random() * 3) + heroLevel;
         }
 
-        // this.enemyInstance.maxHp = 5 + 5 * this.enemyInstance.level;
-        enemyInstance.maxHp += 5 * enemyInstance.level;
+        enemyInstance.defense = enemyInstance.defense * enemyInstance.level + (enemyInstance.defense * 2);
+        enemyInstance.attack = enemyInstance.attack * enemyInstance.level + (enemyInstance.attack * 3);
+        enemyInstance.maxHp = enemyInstance.maxHp * enemyInstance.level + (enemyInstance.maxHp * 2);
 
         return enemyInstance;
     }
