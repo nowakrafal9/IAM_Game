@@ -4,7 +4,7 @@
     right: 0;
     top: 0;
     bottom: 0;
-    /* background-image: url(/assets/maps/battleMap.png); */
+    /* background-image: url(/Assets/maps/battleMap.png); */
     background-size: cover;
     image-rendering: pixelated;
 }

@@ -55,7 +55,7 @@ class OverworldMap {
 
 window.OverworldMap = {
     TestRoom: {
-        src: "./assets/maps/test.png",
+        src: "./Assets/maps/Room.png",
         gameObjects: {},
         cutsceneSpaces: {
             "-10, 111": [
@@ -83,7 +83,7 @@ window.OverworldMap = {
         }
     },
     Room2: {
-        src: "./assets/maps/test.png",
+        src: "./Assets/maps/Room.png",
         gameObjects: {},
         cutsceneSpaces: {
             "-10, 111": [

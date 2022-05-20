@@ -1,7 +1,7 @@
 const generateCharacters = {
     generateHero() {
         return new Person({
-            src: "./assets/characters/adventurer.png",
+            src: "./Assets/characters/Adventurer.png",
             objectType: "Player",
             x: -60, y: 111,
             sizeX: 50, sizeY: 37,
@@ -17,7 +17,7 @@ const generateCharacters = {
         if (randomEnemy == 0 || enemyType === "Slime") {
             return {
                 enemy: new EnemySlime({
-                    src: "./assets/characters/slime.png",
+                    src: "./Assets/characters/Slime.png",
                     objectType: "Slime",
                     x: 360, y: 123,
                     sizeX: 32, sizeY: 25,
@@ -27,7 +27,7 @@ const generateCharacters = {
         if (randomEnemy == 1 || enemyType === "SlimeBoss") {
             return {
                 enemy: new EnemySlime({
-                    src: "./assets/characters/slimeBoss.png",
+                    src: "./Assets/characters/SlimeBoss.png",
                     objectType: "SlimeBoss",
                     x: 360, y: 123,
                     sizeX: 32, sizeY: 25,
