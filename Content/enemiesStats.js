@@ -11,7 +11,7 @@ window.EnemiesStats = {
         name: "Slime boss",
         enemyInstance: {
             id: "sBoss",
-            maxHp: 120,
+            maxHp: 40,
             level: 10,
         }
     }

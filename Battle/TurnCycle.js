@@ -43,40 +43,30 @@ class TurnCycle {
             await this.onNewEvent(event);
         }
 
-        const targetDead = submission.target.hp <= 0;
-        if (targetDead) {
-            await this.onNewEvent({
-                type: "textMessage", text: `${submission.target.name} meets its end!`
-            })
+        // const targetDead = submission.target.hp <= 0;
+        // if (targetDead) {
+        //     await this.onNewEvent({
+        //         type: "textMessage", text: `${submission.target.name} meets its end!`
+        //     })
 
-            if (submission.target.team === "enemy") {
-                const playerActiveId = this.battle.activeCombatants.player;
-                const xp = submission.target.givesXp;
+        //     if (submission.target.team === "enemy") {
+        //         const playerActiveId = this.battle.activeCombatants.player;
+        //         const xp = submission.target.givesXp;
 
-                await this.onNewEvent({
-                    type: "textMessage",
-                    text: `Gained ${xp} XP!`
-                })
+        //         await this.onNewEvent({
+        //             type: "textMessage",
+        //             text: `Gained ${xp} XP!`
+        //         })
 
-                await this.onNewEvent({
-                    type: "giveXp",
-                    xp,
-                    combatant: this.battle.combatants[playerActiveId]
-                })
-            }
-        }
+        //         await this.onNewEvent({
+        //             type: "giveXp",
+        //             xp,
+        //             combatant: this.battle.combatants[playerActiveId]
+        //         })
+        //     }
+        // }
 
-        const winner = this.getWinningSide();
-        if (winner) {
-            await this.onNewEvent({
-                type: "textMessage",
-                text: `${caster.name} wins the battle!`
-            })
-            this.onWinner(winner);
-            return;
-        }
-
-        //Positive status effects after turn
+        //Status effects after turn
         const postEvents = caster.getPostEevents();
         for (let i = 0; i < postEvents.length; i++) {
             const event = {
@@ -95,8 +85,71 @@ class TurnCycle {
             await this.onNewEvent(expiredEvent);
         }
 
+        // const targetDead = submission.target.hp <= 0;
+        // if (targetDead) {
+        //     await this.getXpFromEnemy(submission);
+        // }
+
+        const winner = this.getWinningSide();
+        if (winner) {
+            if (winner === "player") {
+                await this.getXpFromEnemy(submission, caster);
+                await this.onNewEvent({
+                    type: "textMessage",
+                    text: `You won the battle!`
+                })
+            } else {
+                await this.onNewEvent({
+                    type: "textMessage",
+                    text: `You lost the battle...`
+                })
+            }
+            this.onWinner(winner);
+            return;
+        }
+
         this.currentTeam = this.currentTeam === "player" ? "enemy" : "player";
         this.turn();
+    }
+
+    async getXpFromEnemy(submission, caster) {
+        if (submission.target.team === "enemy") {
+            await this.onNewEvent({
+                type: "textMessage", text: `${submission.target.name} meets its end!`
+            })
+
+            const playerActiveId = this.battle.activeCombatants.player;
+            const xp = submission.target.givesXp;
+
+            await this.onNewEvent({
+                type: "textMessage",
+                text: `Gained ${xp} XP!`
+            })
+
+            await this.onNewEvent({
+                type: "giveXp",
+                xp,
+                combatant: this.battle.combatants[playerActiveId]
+            })
+        } else {
+            await this.onNewEvent({
+                type: "textMessage", text: `${caster.name} meets its end!`
+            })
+
+            const playerActiveId = this.battle.activeCombatants.player;
+            const xp = caster.givesXp;
+
+            await this.onNewEvent({
+                type: "textMessage",
+                text: `Gained ${xp} XP!`
+            })
+
+            await this.onNewEvent({
+                type: "giveXp",
+                xp,
+                combatant: this.battle.combatants[playerActiveId]
+            })
+        }
     }
 
     getWinningSide() {

@@ -15,6 +15,46 @@ window.Actions = {
             { type: "textMessage", text: "{CASTER} misses!" },
         ]
     },
+    damage2: {
+        name: "Heavy attack",
+        description: "Exceed your limits by using life force to obliterate enemy",
+        success: [
+            { type: "textMessage", text: "{CASTER} uses {ACTION} on {TARGET}!" },
+            { type: "animation", animation: "attack" },
+            { type: "stateChange", damage: 20 },
+            { type: "animation", animation: "hit" },
+            { type: "stateChange", selfDamage: 3 },
+            { type: "textMessage", text: "{CASTER} was hit with a recoil!" },
+        ],
+        failure: [
+            { type: "textMessage", text: "{CASTER} uses {ACTION} on {TARGET}!" },
+            { type: "animation", animation: "attack" },
+            { type: "textMessage", text: "{CASTER} misses!" },
+        ],
+    },
+    damage3: {
+        name: "Hidden blade",
+        description:
+            "Fake mark your attack and hit enemy with poisonous hidden blade",
+        success: [
+            { type: "textMessage", text: "{CASTER} uses {ACTION} on {TARGET}!" },
+            { type: "animation", animation: "attack" },
+            { type: "stateChange", damage: 5 },
+            {
+                type: "stateChange",
+                status: {
+                    type: "poison",
+                    expiresIn: 2,
+                },
+            },
+            { type: "animation", animation: "hit" },
+        ],
+        failure: [
+            { type: "textMessage", text: "{CASTER} uses {ACTION} on {TARGET}!" },
+            { type: "animation", animation: "attack" },
+            { type: "textMessage", text: "{CASTER} misses!" },
+        ],
+    },
 
     // Statuses
     regenerationStatus: {

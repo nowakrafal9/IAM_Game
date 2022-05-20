@@ -25,8 +25,8 @@ class BattleEvent {
 
         //TODO: damage scaling from level
         if (damage) {
-            target.update({
-                hp: target.hp - damage
+            who.update({
+                hp: who.hp - damage
             })
         }
 

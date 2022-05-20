@@ -87,6 +87,14 @@ class Combatant {
             ]
         }
 
+        if (this.status?.type === "poison") {
+            return [
+                { type: "textMessage", text: "{CASTER} is poisoned!" },
+                { type: "stateChange", damage: 30, onCaster: true },
+                { type: "animation", animation: "death" }
+            ];
+        }
+
         return [];
     }
 

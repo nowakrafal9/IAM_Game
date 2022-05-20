@@ -7,6 +7,6 @@ window.Players = {
         name: "Adventurer",
         type: PlayerTypes.adventurer,
         icon: "./assets/characters/images/adventurer_image.png",
-        actions: ["damage1"]
+        actions: ["damage1", "damage2", "damage3"]
     }
 }
