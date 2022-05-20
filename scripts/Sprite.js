@@ -16,10 +16,12 @@ class Sprite {
         this.animations = null;
         if (config.gameObject instanceof Person) {
             this.animations = config.animations || {
-                "idle-NoFight": [[0, 0], [1, 0], [2, 0], [3, 0]],
+                "idle-NoFight-right": [[0, 0], [1, 0], [2, 0], [3, 0]],
+                "idle-NoFight-left": [[13, 0], [12, 0], [11, 0], [10, 0]],
                 "idle-Fight": [[3, 5], [4, 5], [5, 5], [6, 5]],
 
                 "walk-right": [[1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]],
+                "walk-left": [[12, 1], [11, 1], [10, 1], [9, 1], [8, 1], [7, 1]],
 
                 "fastAttack": [[0, 7], [1, 7], [2, 7], [3, 7]],
 
@@ -45,7 +47,7 @@ class Sprite {
             }
         }
 
-        this.currentAnimation = config.currentAnimation || "idle-NoFight";
+        this.currentAnimation = config.currentAnimation;
         this.currentAnimationFrame = 0;
 
         this.animationFrameLimit = config.animationFrameLimit || 10;

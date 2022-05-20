@@ -68,13 +68,13 @@ class Person extends GameObject {
     updateSprite(state) {
         if (!this.isDead) {
             if (this.movingProgressRemaining > 0) {
-                this.sprite.setAnimation("walk-right");
+                this.sprite.setAnimation("walk-" + this.direction);
                 return;
             }
 
             if (!this.isMakingTurnAction) {
                 if (!this.isInBattle) {
-                    this.sprite.setAnimation("idle-NoFight");
+                    this.sprite.setAnimation("idle-NoFight-" + this.direction);
                 } else {
                     this.sprite.setAnimation("idle-Fight");
                 }
