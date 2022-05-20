@@ -101,7 +101,7 @@ class Overworld {
         this.hud = new Hud();
         this.hud.init(document.querySelector(".game-container"));
 
-        this.startMap(window.OverworldMap.TestRoom, initalState);
+        this.startMap(window.OverworldMap.Room1, initalState);
 
         this.bindActionInput();
         this.bindHeroPositionCheck();

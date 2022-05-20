@@ -54,7 +54,7 @@ class OverworldMap {
 }
 
 window.OverworldMap = {
-    TestRoom: {
+    Room1: {
         src: "./Assets/maps/Room.png",
         gameObjects: {},
         cutsceneSpaces: {
@@ -104,7 +104,7 @@ window.OverworldMap = {
                 {
                     events: [
                         { type: "modifyPlayerFlag", flag: "START_BATTLE", flagValue: true },
-                        { type: "changeMap", map: "TestRoom" },
+                        { type: "changeMap", map: "Room1" },
                     ]
                 }
             ]
