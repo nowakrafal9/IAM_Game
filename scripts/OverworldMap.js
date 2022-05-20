@@ -58,6 +58,14 @@ window.OverworldMap = {
         src: "./assets/maps/test.png",
         gameObjects: {},
         cutsceneSpaces: {
+            "-10, 111": [
+                {
+                    events: [
+                        { type: "textMessage", text: "There's no point in turning back" },
+                        { who: "hero", type: "long_walk", direction: "right" },
+                    ]
+                }
+            ],
             "120, 111": [
                 {
                     required: ["START_BATTLE"],
@@ -78,6 +86,14 @@ window.OverworldMap = {
         src: "./assets/maps/test.png",
         gameObjects: {},
         cutsceneSpaces: {
+            "-10, 111": [
+                {
+                    events: [
+                        { type: "textMessage", text: "There's no point in turning back" },
+                        { who: "hero", type: "long_walk", direction: "right" },
+                    ]
+                }
+            ],
             "120, 111": [
                 {
                     required: ["START_BATTLE"],

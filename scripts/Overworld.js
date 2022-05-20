@@ -68,6 +68,11 @@ class Overworld {
         }
 
         this.map.mountObjects();
+
+        this.map.startCutscene([
+            { who: "hero", type: "long_walk", direction: "right" },
+            { who: "hero", type: "long_walk", direction: "right" },
+        ])
     }
 
     async init() {

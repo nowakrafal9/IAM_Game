@@ -3,7 +3,7 @@ const generateCharacters = {
         return new Person({
             src: "./assets/characters/adventurer.png",
             objectType: "Player",
-            x: 0, y: 111,
+            x: -60, y: 111,
             sizeX: 50, sizeY: 37,
         })
     },
