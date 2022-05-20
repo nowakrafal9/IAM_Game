@@ -98,6 +98,9 @@ class Battle {
                     //Show title screen if dead
                     // this.map.overworld.init();
                     this.progress.deleteSave();
+                    this.map.startCutscene([
+                        { type: "gameOver" }
+                    ])
                 } else {
                     this.progress.save(this.map);
                 }

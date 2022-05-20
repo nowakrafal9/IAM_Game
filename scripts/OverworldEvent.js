@@ -113,6 +113,16 @@ class OverworldEvent {
         menu.init(document.querySelector(".game-container"));
     }
 
+    gameOver(resolve) {
+        const gameOver = new GameOverMenu({
+            map: this.map,
+            onComplete: () => {
+                resolve();
+            }
+        })
+        gameOver.init(document.querySelector(".game-container"));
+    }
+
     init() {
         return new Promise(resolve => {
             this[this.event.type](resolve)
