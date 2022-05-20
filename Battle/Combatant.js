@@ -21,7 +21,7 @@ class Combatant {
     }
 
     get givesXp() {
-        return this.level * 20;
+        return this.killXp ? (this.killXp * this.level * 10) : 0;
     }
 
     createElement() {
@@ -88,13 +88,14 @@ class Combatant {
         }
 
         if (this.status?.type === "poison") {
+            let damageDealt = (Math.floor(this.maxHp * 0.8));
+
             return [
                 { type: "textMessage", text: "{CASTER} is poisoned!" },
-                { type: "stateChange", damage: 30, onCaster: true },
+                { type: "stateChange", damage: damageDealt, onCaster: true },
                 { type: "animation", animation: "death" }
             ];
         }
-
         return [];
     }
 

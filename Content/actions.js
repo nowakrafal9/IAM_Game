@@ -23,7 +23,7 @@ window.Actions = {
             { type: "animation", animation: "attack" },
             { type: "stateChange", damage: 20 },
             { type: "animation", animation: "hit" },
-            { type: "stateChange", selfDamage: 3 },
+            { type: "stateChange", damage: 3, onCaster: true },
             { type: "textMessage", text: "{CASTER} was hit with a recoil!" },
         ],
         failure: [

@@ -3,8 +3,10 @@ class PlayerState {
         this.playerInstance = {
             "hero": {
                 id: "p001",
-                hp: 100,
-                maxHp: 100,
+                hp: 60,
+                maxHp: 60,
+                attack: 15,
+                defense: 15,
                 xp: 0,
                 maxXp: 100,
                 level: 1,

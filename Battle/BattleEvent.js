@@ -18,15 +18,25 @@ class BattleEvent {
         })
         message.init(this.battle.element);
     }
-
+    15
     async stateChange(resolve) {
-        const { caster, target, damage, recover, status, action } = this.event;
+        const { caster, target, damage, recover, status } = this.event;
         let who = this.event.onCaster ? caster : target;
 
-        //TODO: damage scaling from level
         if (damage) {
+            let damageDealt = 0;
+            if (caster === who) {
+                damageDealt = Math.ceil(
+                    (((2 * caster.level) / 5 + 2) * damage * caster.attack) /
+                    caster.defense / 5)
+            } else {
+                damageDealt = Math.ceil(
+                    (((2 * caster.level) / 5 + 2) * damage * caster.attack) /
+                    target.defense / 5);
+            }
+
             who.update({
-                hp: who.hp - damage
+                hp: who.hp - damageDealt
             })
         }
 
@@ -76,8 +86,19 @@ class BattleEvent {
 
         const step = () => {
             if (amount > 0) {
-                amount -= 1;
-                combatant.xp += 1;
+                if (amount > 1000) {
+                    amount -= 100;
+                    combatant.xp += 100;
+                } else if (amount > 500) {
+                    amount -= 50;
+                    combatant.xp += 50;
+                } else if (amount > 250) {
+                    amount -= 10;
+                    combatant.xp += 10;
+                } else {
+                    amount -= 5;
+                    combatant.xp += 5;
+                }
 
                 if (combatant.xp >= combatant.maxXp) {
                     combatant.xp = combatant.maxXp - combatant.xp;
