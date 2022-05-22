@@ -18,9 +18,9 @@ class BattleEvent {
         })
         message.init(this.battle.element);
     }
-    15
+
     async stateChange(resolve) {
-        const { caster, target, damage, statusDamage, recover, status } = this.event;
+        const { caster, target, damage, statusDamage, recover, status, fireStatus } = this.event;
         let who = this.event.onCaster ? caster : target;
 
         if (damage) {
@@ -41,8 +41,13 @@ class BattleEvent {
         }
 
         if (statusDamage) {
+            let sDamage = statusDamage;
+            if (fireStatus) {
+                sDamage *= target.attack
+            }
+
             who.update({
-                hp: who.hp - statusDamage
+                hp: who.hp - sDamage
             })
         }
 
@@ -110,6 +115,11 @@ class BattleEvent {
                     combatant.xp = combatant.maxXp - combatant.xp;
                     combatant.level += 1;
                     combatant.maxXp = Math.floor(combatant.maxXp * 1.25);
+
+                    combatant.defense += 5;
+                    combatant.attack += 5;
+                    combatant.hp += 10;
+                    combatant.maxHp += 10;
                 }
 
                 combatant.update();

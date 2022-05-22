@@ -1,6 +1,6 @@
 window.Actions = {
     // Attack types
-    damage1: {
+    FastAttack: {
         name: "Fast attack",
         description: "Attack as swift as a wind",
         success: [
@@ -15,7 +15,7 @@ window.Actions = {
             { type: "textMessage", text: "{CASTER} misses!" },
         ]
     },
-    damage2: {
+    HeavyAttack: {
         name: "Heavy attack",
         description: "Exceed your limits by using life force to obliterate enemy",
         success: [
@@ -32,7 +32,7 @@ window.Actions = {
             { type: "textMessage", text: "{CASTER} misses!" },
         ],
     },
-    damage3: {
+    HiddenBlade: {
         name: "Hidden blade",
         description:
             "Fake mark your attack and hit enemy with poisonous hidden blade",
@@ -43,7 +43,51 @@ window.Actions = {
             {
                 type: "stateChange",
                 status: {
-                    type: "poison",
+                    type: "Poison",
+                    expiresIn: 2,
+                },
+            },
+            { type: "animation", animation: "hit" },
+        ],
+        failure: [
+            { type: "textMessage", text: "{CASTER} uses {ACTION} on {TARGET}!" },
+            { type: "animation", animation: "attack" },
+            { type: "textMessage", text: "{CASTER} misses!" },
+        ],
+    },
+    SlimePoisonAttack: {
+        name: "Poison Tackle",
+        description: "",
+        success: [
+            { type: "textMessage", text: "{CASTER} uses {ACTION} on {TARGET}!" },
+            { type: "animation", animation: "attack" },
+            { type: "stateChange", damage: 4 },
+            {
+                type: "stateChange",
+                status: {
+                    type: "Poison",
+                    expiresIn: 2,
+                },
+            },
+            { type: "animation", animation: "hit" },
+        ],
+        failure: [
+            { type: "textMessage", text: "{CASTER} uses {ACTION} on {TARGET}!" },
+            { type: "animation", animation: "attack" },
+            { type: "textMessage", text: "{CASTER} misses!" },
+        ],
+    },
+    SlimeFireAttack: {
+        name: "Lava Splash",
+        description: "",
+        success: [
+            { type: "textMessage", text: "{CASTER} uses {ACTION} on {TARGET}!" },
+            { type: "animation", animation: "attack" },
+            { type: "stateChange", damage: 8 },
+            {
+                type: "stateChange",
+                status: {
+                    type: "Fire",
                     expiresIn: 2,
                 },
             },
@@ -89,12 +133,22 @@ window.Actions = {
     // Items
     item_healthPotionSmall: {
         name: "Recovery potion(S)",
-        description: "Small potion giving 10 hp",
+        description: "Small potion giving 20 hp",
         targetType: "friendly",
         success: [
             { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
-            { type: "stateChange", recover: 10 },
-            { type: "textMessage", text: "{CASTER} recovers 10 hp!" },
+            { type: "stateChange", recover: 20 },
+            { type: "textMessage", text: "{CASTER} recovers 20 hp!" },
+        ],
+    },
+    item_healthPotionMedium: {
+        name: "Recovery potion(M)",
+        description: "Small potion giving 40 hp",
+        targetType: "friendly",
+        success: [
+            { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
+            { type: "stateChange", recover: 40 },
+            { type: "textMessage", text: "{CASTER} recovers 40 hp!" },
         ],
     }
 }

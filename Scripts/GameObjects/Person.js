@@ -19,7 +19,7 @@ class Person extends GameObject {
             this.updatePosition();
         } else {
             // Move if key pressed
-            if (!state.map.isCutscenePlaying && state.arrow && this.objectType == "Player") {
+            if (!state.map.isCutscenePlaying && state.arrow && this.objectType == "Player" && !this.isDead) {
                 this.startBehavior(state, {
                     type: "walk",
                     direction: state.arrow

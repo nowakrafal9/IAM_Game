@@ -42,8 +42,6 @@
     background: var(--menu-font-color);
     color: #fff;
     font-size: 0.3rem;
-    /* font-weight: 700; */
-
     padding: 0.1em;
     margin: 0;
 }
@@ -104,10 +102,10 @@
     margin: 0;
 }
 
-.Combatant_status[data-status="positive"] {
+/* .Combatant_status[data-status="positive"] {
     color: green;
 }
 
 .Combatant_status[data-status="negative"] {
     background: red;
-}
+} */

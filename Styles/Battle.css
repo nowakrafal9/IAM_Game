@@ -4,34 +4,5 @@
     right: 0;
     top: 0;
     bottom: 0;
-    /* background-image: url(/Assets/maps/battleMap.png); */
-    background-size: cover;
     image-rendering: pixelated;
 }
-
-/* .Battle_hero {
-    position: absolute;
-    transform: scale(1.5);
-    width: 50px;
-    height: 37px;
-    overflow: hidden;
-
-    bottom: 43px;
-    left: 1px;
-}
-
-.Battle_enemy {
-    position: absolute;
-    transform: scale(1.5);
-    width: 32px;
-    height: 23px;
-    overflow: hidden;
-
-    bottom: 40px;
-    right: 20px;
-}
-
-.Battle_hero img,
-.Battle_enemy img {
-    pointer-events: none;
-} */

@@ -21,7 +21,7 @@ class Combatant {
     }
 
     get givesXp() {
-        return this.killXp ? (this.killXp * this.level * 10) : 0;
+        return this.killXp ? (this.killXp * this.level) : 0;
     }
 
     createElement() {
@@ -80,19 +80,29 @@ class Combatant {
     // }
 
     getPostEevents() {
-        if (this.status?.type === "regeneration") {
+        if (this.status?.type === "Regeneration") {
             return [
                 { type: "textMessage", text: "I feel power!!!" },
                 { type: "stateChange", recover: 5, onCaster: true }
             ]
         }
 
-        if (this.status?.type === "poison") {
-            let damageDealt = (Math.floor(this.maxHp * 0.16));
+        if (this.status?.type === "Poison") {
+            let damageDealt = (Math.floor(this.maxHp * 0.10));
 
             return [
                 { type: "textMessage", text: "{CASTER} is poisoned!" },
                 { type: "stateChange", statusDamage: damageDealt, onCaster: true },
+                { type: "animation", animation: "death" }
+            ];
+        }
+
+        if (this.status?.type === "Fire") {
+            let damageDealt = 0.35;
+
+            return [
+                { type: "textMessage", text: "{CASTER} is on fire!" },
+                { type: "stateChange", statusDamage: damageDealt, fireStatus: true, onCaster: true },
                 { type: "animation", animation: "death" }
             ];
         }

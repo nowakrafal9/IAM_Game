@@ -11,7 +11,7 @@ class GameOverMenu {
                 description: "Return to menu to start a new adventure",
                 handler: () => {
                     this.close();
-                    this.map.overworld.init();
+                    window.location.reload();
                 }
             }]
     }

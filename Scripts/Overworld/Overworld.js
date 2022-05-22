@@ -4,30 +4,34 @@ class Overworld {
         this.canvas = this.element.querySelector(".game-canvas");
         this.ctx = this.canvas.getContext("2d");
         this.map = null;
+        this.gameRunning = false;
     }
 
     startGameLoop() {
-        const step = () => {
-            //Clear canvas
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        if (!this.gameRunning) {
+            this.gameRunning = true;
+            const step = () => {
+                //Clear canvas
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-            //Draw background
-            this.map.drawImage(this.ctx);
+                //Draw background
+                this.map.drawImage(this.ctx);
 
-            //Draw objects
-            Object.values(this.map.gameObjects).forEach(object => {
-                object.update({
-                    arrow: this.directionInput.direction,
-                    map: this.map
-                });
-                object.sprite.draw(this.ctx);
-            })
+                //Draw objects
+                Object.values(this.map.gameObjects).forEach(object => {
+                    object.update({
+                        arrow: this.directionInput.direction,
+                        map: this.map
+                    });
+                    object.sprite.draw(this.ctx);
+                })
 
-            requestAnimationFrame(() => {
-                step();
-            })
+                requestAnimationFrame(() => {
+                    step();
+                })
+            }
+            step();
         }
-        step();
     }
 
     bindActionInput() {
@@ -69,10 +73,12 @@ class Overworld {
 
         this.map.mountObjects();
 
-        this.map.startCutscene([
-            { who: "hero", type: "long_walk", direction: "right" },
-            { who: "hero", type: "long_walk", direction: "right" },
-        ])
+        if (!initalState) {
+            this.map.startCutscene([
+                { who: "hero", type: "long_walk", direction: "right" },
+                { who: "hero", type: "long_walk", direction: "right" },
+            ])
+        }
     }
 
     async init() {

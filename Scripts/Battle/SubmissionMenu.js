@@ -91,8 +91,8 @@ class SubmissionMenu {
     }
 
     decide() {
-        // TODO: Enemies randomly decides what to do...
-        this.menuSubmit(Actions[this.caster.actions[0]]);
+        let decision = Math.floor(Math.random() * this.caster.actions.length)
+        this.menuSubmit(Actions[this.caster.actions[decision]]);
     }
 
     showMenu(container) {
@@ -108,7 +108,5 @@ class SubmissionMenu {
         } else {
             this.decide();
         }
-
-        // this.decide();
     }
 }

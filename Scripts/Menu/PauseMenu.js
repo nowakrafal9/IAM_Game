@@ -17,10 +17,11 @@ class PauseMenu {
                     }
                 },
                 {
-                    label: "Close menu",
-                    description: "Close the pause menu",
+                    label: "Close game",
+                    description: "Return to title screen",
                     handler: () => {
                         this.close();
+                        window.location.reload();
                     },
                 }]
         }

@@ -10,8 +10,20 @@ const generateCharacters = {
 
     generateEnemy(enemyType = null) {
         let randomEnemy = null;
+
         if (enemyType === null) {
-            randomEnemy = Math.floor(Math.random() * 2);
+            if (window.player.currentRoom % 10 == 0) {
+                return {
+                    enemy: new EnemySlime({
+                        src: "./Assets/characters/SlimeBoss.png",
+                        objectType: "SlimeBoss",
+                        x: 360, y: 123,
+                        sizeX: 32, sizeY: 25,
+                    })
+                }
+            } else {
+                randomEnemy = Math.floor(Math.random() * 4);
+            }
         }
 
         if (randomEnemy == 0 || enemyType === "Slime") {
@@ -23,12 +35,29 @@ const generateCharacters = {
                     sizeX: 32, sizeY: 25,
                 })
             }
-        }
-        if (randomEnemy == 1 || enemyType === "SlimeBoss") {
+        } else if (randomEnemy == 1 || enemyType === "FireSlime") {
             return {
                 enemy: new EnemySlime({
-                    src: "./Assets/characters/SlimeBoss.png",
-                    objectType: "SlimeBoss",
+                    src: "./Assets/characters/FireSlime.png",
+                    objectType: "FireSlime",
+                    x: 360, y: 123,
+                    sizeX: 32, sizeY: 25,
+                })
+            }
+        } else if (randomEnemy == 2 || enemyType === "PoisonSlime") {
+            return {
+                enemy: new EnemySlime({
+                    src: "./Assets/characters/PoisonSlime.png",
+                    objectType: "PoisonSlime",
+                    x: 360, y: 123,
+                    sizeX: 32, sizeY: 25,
+                })
+            }
+        } else if (randomEnemy == 3 || enemyType === "IceSlime") {
+            return {
+                enemy: new EnemySlime({
+                    src: "./Assets/characters/IceSlime.png",
+                    objectType: "IceSlime",
                     x: 360, y: 123,
                     sizeX: 32, sizeY: 25,
                 })
