@@ -1,7 +1,7 @@
 .Combatant {
     width: 67px;
     height: 14px;
-    background: url("/Assets/ui/Combatant-ui.png") no-repeat no-repeat;
+    background: url("/IAM_Game/Assets/ui/Combatant-ui.png") no-repeat no-repeat;
     position: absolute;
 }
 
