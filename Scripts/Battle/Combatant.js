@@ -69,16 +69,6 @@ class Combatant {
         }
     }
 
-    // getReplacedEvents(originalEvents) {
-    //     if (this.status?.type === "stun" && utils.randomFromArray([true, false, false])) {
-    //         return [
-    //             { type: "textMessage", text: `${this.name} missess!` }
-    //         ]
-    //     }
-
-    //     return originalEvents;
-    // }
-
     getPostEevents() {
         if (this.status?.type === "Regeneration") {
             return [

@@ -95,8 +95,6 @@ class Battle {
 
                 //Manage save files after battle
                 if (winner === "enemy") {
-                    //Show title screen if dead
-                    // this.map.overworld.init();
                     this.progress.deleteSave();
                     this.map.startCutscene([
                         { type: "gameOver" }
@@ -105,6 +103,7 @@ class Battle {
                     this.progress.save(this.map);
                 }
 
+                //Change player state after battle
                 playerState.playerInstance.hero.hp = combatant.hp;
                 playerState.playerInstance.hero.maxHp = combatant.maxHp;
                 playerState.playerInstance.hero.xp = combatant.xp;

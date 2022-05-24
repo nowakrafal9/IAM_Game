@@ -30,8 +30,6 @@ class GameObject {
     update() { }
 
     async doBehaviorEvent(map) {
-        //Don't do anything if there is a more important cutscene or I don't have config to do anything
-        //anyway.
         if (map.isCutscenePlaying || this.behaviorLoop.length === 0 || this.isStanding) {
             return;
         }
@@ -40,7 +38,7 @@ class GameObject {
         let eventConfig = this.behaviorLoop[this.behaviorLoopIndex];
         eventConfig.who = this.id;
 
-        //Create an event instance out of our next event config
+        //Create an event instance out of next event config
         const eventHandler = new OverworldEvent({ map, event: eventConfig });
         await eventHandler.init();
 
@@ -50,7 +48,6 @@ class GameObject {
             this.behaviorLoopIndex = 0;
         }
 
-        //Do it again!
         this.doBehaviorEvent(map);
     }
 }

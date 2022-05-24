@@ -4,7 +4,7 @@ class TurnCycle {
         this.onNewEvent = onNewEvent;
         this.onWinner = onWinner;
 
-        this.currentTeam = "enemy"; // "enemy"
+        this.currentTeam = "player";
     }
 
     async turn() {
@@ -27,7 +27,7 @@ class TurnCycle {
             this.battle.items = this.battle.items.filter(i => i.instanceId !== submission.instanceId)
         }
 
-        // const resultingEvents = caster.getReplacedEvents(submission.action.success);
+
         const resultingEvents = submission.action.success;
         // const resultingEvents = submission.action.failure;
 
@@ -41,29 +41,6 @@ class TurnCycle {
             }
             await this.onNewEvent(event);
         }
-
-        // const targetDead = submission.target.hp <= 0;
-        // if (targetDead) {
-        //     await this.onNewEvent({
-        //         type: "textMessage", text: `${submission.target.name} meets its end!`
-        //     })
-
-        //     if (submission.target.team === "enemy") {
-        //         const playerActiveId = this.battle.activeCombatants.player;
-        //         const xp = submission.target.givesXp;
-
-        //         await this.onNewEvent({
-        //             type: "textMessage",
-        //             text: `Gained ${xp} XP!`
-        //         })
-
-        //         await this.onNewEvent({
-        //             type: "giveXp",
-        //             xp,
-        //             combatant: this.battle.combatants[playerActiveId]
-        //         })
-        //     }
-        // }
 
         //Status effects after turn
         const postEvents = caster.getPostEevents();
@@ -84,11 +61,7 @@ class TurnCycle {
             await this.onNewEvent(expiredEvent);
         }
 
-        // const targetDead = submission.target.hp <= 0;
-        // if (targetDead) {
-        //     await this.getXpFromEnemy(submission);
-        // }
-
+        //Check if there's a winner
         const winner = this.getWinningSide();
         if (winner) {
             if (winner === "player") {
@@ -165,11 +138,6 @@ class TurnCycle {
     }
 
     async init() {
-        // await this.onNewEvent({
-        //     type: "textMessage",
-        //     text: "The battle has started"
-        // })
-
         this.turn();
     }
 }
