@@ -29,7 +29,7 @@ class TitleScreen {
         this.element = document.createElement("div");
         this.element.classList.add("TitleScreen");
         this.element.innerHTML = (`
-            <img class = "TitleScreen_logo" src="./Assets/favicon.png" alt = "Dugeon Dweller"/>
+            <img class = "TitleScreen_logo" src="Assets/favicon.png" alt = "Dugeon Dweller"/>
         `)
     }
 
