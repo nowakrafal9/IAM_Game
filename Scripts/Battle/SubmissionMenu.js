@@ -1,3 +1,21 @@
+/*
+    Klasa SubmissionMenu odpowiedzialna za obsługę menu wyboru akcji
+
+    * getPages() 
+        Funkcja zwracająca zawartość strony menu
+    
+    * menuSubmit()
+        Funkcja odpowiedziala za wybór akcji
+
+    * decide()
+        Funkcja losująca akcje przeciwnika
+
+    * showMenu()
+        Funkcja wyświetlająca menu wyboru akcji
+
+    * init()
+        Funckja inicjalizjąca menu
+*/
 class SubmissionMenu {
     constructor({ caster, enemy, onComplete, items }) {
         this.caster = caster;
