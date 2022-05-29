@@ -43,7 +43,7 @@ class EnemySlime extends GameObject {
             this.updateSprite(state);
         }
 
-        if (behavior.type === "long_walk") {
+        if (behavior.type === "longWalk") {
             this.movingProgressRemaining = 30;
             this.updateSprite(state);
         }

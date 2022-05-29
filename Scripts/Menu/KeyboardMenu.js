@@ -1,3 +1,18 @@
+/*
+    Klasa KeyboardMenu odpowiedzialna za menu wyboru.
+
+    * setOptions()
+        Funkcja wstawiająca opcje do menu
+
+    * createElement()
+        Funcja przygotująca menu wyboru
+
+    * end()
+        Funkcja wyłączająca menu wyboru
+
+    * init()
+        Funkcja inicjalizująca menu wyboru
+*/
 class KeyboardMenu {
     constructor(config = {}) {
         this.options = [];
@@ -46,7 +61,6 @@ class KeyboardMenu {
         this.element = document.createElement("div");
         this.element.classList.add("KeyboardMenu");
 
-        //Description box element
         this.descriptionElement = document.createElement("div");
         this.descriptionElement.classList.add("DescriptionBox");
         this.descriptionElement.innerHTML = (`<p></p>`);

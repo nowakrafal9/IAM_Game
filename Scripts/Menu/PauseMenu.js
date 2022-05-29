@@ -1,3 +1,18 @@
+/*
+    Klasa PauseMenu odpowiedzialna za menu pauzy.
+
+    * getOptions()
+        Funkcja zwracająca opcje do menu
+
+    * createElement()
+        Funcja przygotująca menu
+
+    * close()
+        Funkcja zamykająca menu pauzy
+
+    * init()
+        Funkcja inicjalizująca
+*/
 class PauseMenu {
     constructor({ map, progress, onComplete }) {
         this.map = map;

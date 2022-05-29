@@ -1,3 +1,18 @@
+/*
+    Klasa GameOverMenu odpowiedzialna za ekran śmierci.
+
+    * getOptions()
+        Funkcja zwracająca opcje do menu
+
+    * createElement()
+        Funcja przygotująca menu
+
+    * close()
+        Funkcja zamykająca ekran śmierci
+
+    * init()
+        Funkcja inicjalizująca
+*/
 class GameOverMenu {
     constructor({ map, onComplete }) {
         this.map = map;

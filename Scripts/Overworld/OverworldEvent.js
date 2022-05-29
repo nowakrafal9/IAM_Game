@@ -1,3 +1,36 @@
+/*
+    Klasa OverworldEvent odpowiedzialna za zdarzenia w świecie poza bitwą
+
+    * stand()
+        Funkcja wywołująca zachowanie postaci - stania w miejscy
+    
+    * walk()
+        Funkcja wywołująca zachowanie postaci - poruszania się
+
+    * longWalk()
+        Funkcja wywołująca zachowanie postaci - poruszania się
+
+    * textMessage()
+        Funkcja wywołująca wyświetlenie wiadomości
+
+    * changeRoom()
+        Funkcja wywołująca zmianę pomieszczenie
+
+    * battle()
+        Funkcja wywołująca rozpoczęcie walki
+
+    * modifyPlayerFlag()
+        Funkcja zmianiająca flage bohatera
+
+    * pause()
+        Funkcja wyświetlacją menu pauzy
+
+    * gameOver()
+        Funkcja wyświetlająca ekran śmierci
+
+    * init()
+        Funkcja inicjalizująca
+*/
 class OverworldEvent {
     constructor({ map, event }) {
         this.map = map;
@@ -41,12 +74,12 @@ class OverworldEvent {
         document.addEventListener("WalkingComplete", completeHandler)
     }
 
-    long_walk(resolve) {
+    longWalk(resolve) {
         const who = this.map.gameObjects[this.event.who];
         who.startBehavior({
             map: this.map
         }, {
-            type: "long_walk",
+            type: "longWalk",
             direction: this.event.direction,
         })
 
@@ -67,7 +100,7 @@ class OverworldEvent {
         message.init(document.querySelector(".game-container"))
     }
 
-    changeMap(resolve) {
+    changeRoom(resolve) {
         const sceneTransition = new SceneTransition();
         sceneTransition.init(document.querySelector(".game-container"), () => {
             this.map.overworld.startMap(window.OverworldMap[this.event.map]);
@@ -79,7 +112,7 @@ class OverworldEvent {
     }
 
     battle(resolve) {
-        //Setting animation type to battle one
+        //Ustawienie wszystkich animacji na bitewne
         Object.keys(this.map.gameObjects).forEach(key => {
             this.map.gameObjects[key].isInBattle = true;
         });

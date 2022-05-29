@@ -1,3 +1,21 @@
+/*
+    Klasa Overworld przyjmująca rolę kontrolera w którym zamieszczone są pozostałe komponenty
+
+    * startGameLoop()
+        Funkcja odpowiedzialna za game loop rysujący ekran gry
+    
+    * bindActionInput()
+        Funkcja przypisująca akcje do przycisku
+
+    * bindHeroPositionCheck()
+        Funkcja nasłuchują czy jakieś zdarzenie znajduje się na pozycji gracza
+
+    * startMap()
+        Funkcja uruchamiająca pokój w którym znajdują się postacie 
+
+    * init()
+        Asynchroniczna funkcja inicjalizacji
+*/
 class Overworld {
     constructor(config) {
         this.element = config.element;
@@ -11,13 +29,13 @@ class Overworld {
         if (!this.gameRunning) {
             this.gameRunning = true;
             const step = () => {
-                //Clear canvas
+                //Czyszczenie canvas
                 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-                //Draw background
+                //Rysowanie tła
                 this.map.drawImage(this.ctx);
 
-                //Draw objects
+                //Rysowanie obiektów
                 Object.values(this.map.gameObjects).forEach(object => {
                     object.update({
                         arrow: this.directionInput.direction,
@@ -47,7 +65,7 @@ class Overworld {
     bindHeroPositionCheck() {
         document.addEventListener("WalkingComplete", e => {
             if (e.detail.whoId === "hero") {
-                this.map.checkForFootstepCutscene();
+                this.map.checkForCutscene();
             }
         })
     }
@@ -56,12 +74,17 @@ class Overworld {
         this.map = new OverworldMap(mapConfig);
         this.map.overworld = this;
 
+        //Wygenerowanie obiektu gracza
         this.map.gameObjects = {
             hero: generateCharacters.generateHero(),
         }
+        //Wygenerowanie obiektu przeciwnika
         this.map.gameObjects = Object.assign(this.map.gameObjects, generateCharacters.generateEnemy(initalState?.enemyInfo[1]))
+
+        //Wygenereowanie zdarzenia rozpoczęcia walki
         this.map.cutsceneSpaces["120, 111"][0].events = generateEvents.generateBattle(this.map.gameObjects["enemy"]);
 
+        //Podmiana wartości jeżeli zapis istnieje
         if (initalState) {
             this.map.gameObjects["hero"].x = initalState.heroPos[0];
             this.map.gameObjects["hero"].y = initalState.heroPos[1];
@@ -73,10 +96,11 @@ class Overworld {
 
         this.map.mountObjects();
 
+        //Jeżeli nie wczytano gry to po przejściu do pokoju przejdź w prawo
         if (!initalState) {
             this.map.startCutscene([
-                { who: "hero", type: "long_walk", direction: "right" },
-                { who: "hero", type: "long_walk", direction: "right" },
+                { who: "hero", type: "longWalk", direction: "right" },
+                { who: "hero", type: "longWalk", direction: "right" },
             ])
         }
     }
@@ -92,7 +116,6 @@ class Overworld {
         const useSaveFile = await this.titleScreen.init(container);
 
         let initalState = null;
-        // const saveFile = this.progress.getSaveFile();
         if (useSaveFile) {
             this.progress.load();
             initalState = {
@@ -107,7 +130,7 @@ class Overworld {
         this.hud = new Hud();
         this.hud.init(document.querySelector(".game-container"));
 
-        this.startMap(window.OverworldMap.Room1, initalState);
+        this.startMap(window.OverworldMap.Room, initalState);
 
         this.bindActionInput();
         this.bindHeroPositionCheck();

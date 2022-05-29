@@ -71,10 +71,10 @@ const generateCharacters = {
 const generateEvents = {
     generateBattle(who) {
         let events = [
-            { who: "enemy", type: "long_walk", direction: "left" },
+            { who: "enemy", type: "longWalk", direction: "left" },
             { type: "textMessage", text: "A wild enemy appears!!!" },
-            { who: "enemy", type: "long_walk", direction: "left" },
-            { who: "enemy", type: "long_walk", direction: "left" },
+            { who: "enemy", type: "longWalk", direction: "left" },
+            { who: "enemy", type: "longWalk", direction: "left" },
             { type: "battle", enemyId: who.objectType },
         ];
 

@@ -1,3 +1,18 @@
+/*
+    Klasa OverworldMap odpowiedzialna za mapę gry
+
+    * drawImage()
+        Funkcja odpowiedzialna za rysowanie tła
+
+    * mountObjects()
+        Funkcja odpowiedzialna przypisanie id do obiektów znajdujących się na mapie
+
+    * startCutscene()
+        Asynchroniczna funkcja odpowiedzialna za uruchomienie przerywnika filmowego
+
+    * checkForCutscene()
+        Funkcja sprawdzająca czy w danym miejscu ma zostać wywołane zdarzenie
+*/
 class OverworldMap {
     constructor(config) {
         this.overworld = null;
@@ -35,7 +50,7 @@ class OverworldMap {
         this.isCutscenePlaying = false;
     }
 
-    checkForFootstepCutscene() {
+    checkForCutscene() {
         const hero = this.gameObjects["hero"];
         const match = this.cutsceneSpaces[`${hero.x}, ${hero.y}`];
 
@@ -51,8 +66,9 @@ class OverworldMap {
     }
 }
 
+//Wygląd pokoju wraz z ustawionymi początkowymi zdarzeniami 
 window.OverworldMap = {
-    Room1: {
+    Room: {
         src: "./Assets/maps/Room.png",
         gameObjects: {},
         cutsceneSpaces: {
@@ -60,7 +76,7 @@ window.OverworldMap = {
                 {
                     events: [
                         { type: "textMessage", text: "There's no point in turning back" },
-                        { who: "hero", type: "long_walk", direction: "right" },
+                        { who: "hero", type: "longWalk", direction: "right" },
                     ]
                 }
             ],
@@ -74,35 +90,7 @@ window.OverworldMap = {
                 {
                     events: [
                         { type: "modifyPlayerFlag", flag: "START_BATTLE", flagValue: true },
-                        { type: "changeMap", map: "Room2" },
-                    ]
-                }
-            ]
-        }
-    },
-    Room2: {
-        src: "./Assets/maps/Room.png",
-        gameObjects: {},
-        cutsceneSpaces: {
-            "-10, 111": [
-                {
-                    events: [
-                        { type: "textMessage", text: "There's no point in turning back" },
-                        { who: "hero", type: "long_walk", direction: "right" },
-                    ]
-                }
-            ],
-            "120, 111": [
-                {
-                    required: ["START_BATTLE"],
-                    events: []
-                }
-            ],
-            "340, 111": [
-                {
-                    events: [
-                        { type: "modifyPlayerFlag", flag: "START_BATTLE", flagValue: true },
-                        { type: "changeMap", map: "Room1" },
+                        { type: "changeRoom", map: "Room" },
                     ]
                 }
             ]
