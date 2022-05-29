@@ -20,13 +20,13 @@ class RevealingText {
         this.isDone = false;
     }
 
-    revealOneCharacter(list) {
-        const next = list.splice(0, 1)[0];
+    revealOneCharacter(characters) {
+        const next = characters.splice(0, 1)[0];
         next.span.classList.add("revealed");
 
-        if (list.length > 0) {
+        if (characters.length > 0) {
             this.timeout = setTimeout(() => {
-                this.revealOneCharacter(list);
+                this.revealOneCharacter(characters);
             }, next.delayAfter)
         } else {
             this.isDone = true;
