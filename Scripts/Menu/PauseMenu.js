@@ -14,32 +14,30 @@
         Funkcja inicjalizująca
 */
 class PauseMenu {
-    constructor({ map, progress, onComplete }) {
+    constructor({ map, saveManagement, onComplete }) {
         this.map = map;
-        this.progress = progress;
+        this.saveManagement = saveManagement;
         this.onComplete = onComplete;
     }
 
-    getOptions(pageKey) {
-        if (pageKey === "root") {
-            return [
-                {
-                    label: "Save",
-                    description: "Save your progress",
-                    handler: () => {
-                        this.progress.save(this.map);
-                        this.close();
-                    }
+    getOptions() {
+        return [
+            {
+                label: "Save",
+                description: "Save your progress",
+                handler: () => {
+                    this.saveManagement.save(this.map);
+                    this.close();
+                }
+            },
+            {
+                label: "Close game",
+                description: "Return to title screen",
+                handler: () => {
+                    this.close();
+                    window.location.reload();
                 },
-                {
-                    label: "Close game",
-                    description: "Return to title screen",
-                    handler: () => {
-                        this.close();
-                        window.location.reload();
-                    },
-                }]
-        }
+            }]
     }
 
     createElement() {
@@ -63,7 +61,7 @@ class PauseMenu {
             descriptionContainer: container
         })
         this.keyboardMenu.init(this.element);
-        this.keyboardMenu.setOptions(this.getOptions("root"));
+        this.keyboardMenu.setOptions(this.getOptions());
 
         container.appendChild(this.element);
 

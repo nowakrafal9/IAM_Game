@@ -14,12 +14,12 @@
         Funkcja inicjalizująca
 */
 class TitleScreen {
-    constructor({ progress }) {
-        this.progress = progress;
+    constructor({ saveManagement }) {
+        this.saveManagement = saveManagement;
     }
 
     getOptions(resolve) {
-        const saveFile = this.progress.getSaveFile();
+        const saveFile = this.saveManagement.getSaveFile();
         return [
             {
                 label: "New Game",
