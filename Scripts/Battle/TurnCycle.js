@@ -48,6 +48,7 @@ class TurnCycle {
         const resultingEvents = submission.action.success;
         // const resultingEvents = submission.action.failure;
 
+        //Wywołanie kolejnych zdarzeń
         for (let i = 0; i < resultingEvents.length; i++) {
             const event = {
                 ...resultingEvents[i],
@@ -101,7 +102,7 @@ class TurnCycle {
         this.turn();
     }
 
-    async getXpFromEnemy(submission, caster) {
+    async getXpFromEnemy(submission) {
         if (submission.target.team === "enemy") {
             await this.onNewEvent({
                 type: "textMessage", text: `${submission.target.name} meets its end!`

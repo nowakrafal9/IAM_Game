@@ -1,5 +1,5 @@
 /*
-    Klasa Combatant odpowiedzialna za obsługę kombatantów walczących w bitwie
+    Klasa Combatant odpowiedzialna za obsługę informacji kombatantów
 
     * get hpPercent() 
         Getter zwracający procentową wartość punktów zdrowia

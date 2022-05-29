@@ -17,7 +17,7 @@ class Battle {
         this.mapObjects = this.map.gameObjects;
         this.enemy = config.enemy;
         this.onComplete = config.onComplete;
-        this.progress = config.progress;
+        this.saveManagement = config.saveManagement;
 
         this.combatants = {};
         this.items = [];
@@ -101,7 +101,7 @@ class Battle {
                 })
             },
             onWinner: winner => {
-                //Akcje wykonane po skończonej bitwie    
+                //Akcje wykonane kiedy któraś ze stron jest zwycięzcą    
 
                 //Zmiana flagi bohatera w celu uniknięcia ponowienia bitwy w pokoju
                 player.flags["START_BATTLE"] = false;
@@ -119,12 +119,12 @@ class Battle {
                 //w przypadku przegranej: zapis jest usuwany
                 //w przypadku wygranej: nadpisanie go
                 if (winner === "enemy") {
-                    this.progress.deleteSave();
+                    this.saveManagement.deleteSave();
                     this.map.startCutscene([
                         { type: "gameOver" }
                     ])
                 } else {
-                    this.progress.save(this.map);
+                    this.saveManagement.save(this.map);
                 }
 
                 //Zapisanie statystyk bohatera po walce w globalnym stanie bohatera

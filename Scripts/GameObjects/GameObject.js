@@ -1,8 +1,5 @@
 /*
-    Klasa GameObject odpowiedzialna za zarządzanie rysowanymi obiektami
-
-    * update()
-        Funkcja odpowiedzialna za wprowadzenie zmian w obiekcie
+    Klasa GameObject odpowiedzialna za zarządzanie obiektami gry
 */
 class GameObject {
     constructor(config) {

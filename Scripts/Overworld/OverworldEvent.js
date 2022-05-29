@@ -119,7 +119,7 @@ class OverworldEvent {
         let EnemyInstance = Object.assign({}, EnemiesStats);
 
         const battle = new Battle({
-            progress: this.map.overworld.progress,
+            saveManagement: this.map.overworld.saveManagement,
             enemy: EnemyInstance[this.event.enemyId],
             map: this.map,
             onComplete: () => {
@@ -138,7 +138,7 @@ class OverworldEvent {
     pause(resolve) {
         const menu = new PauseMenu({
             map: this.map,
-            progress: this.map.overworld.progress,
+            saveManagement: this.map.overworld.saveManagement,
             onComplete: () => {
                 resolve();
             }

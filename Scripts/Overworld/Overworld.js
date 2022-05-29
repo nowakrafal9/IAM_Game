@@ -108,22 +108,22 @@ class Overworld {
     async init() {
         const container = document.querySelector(".game-container");
 
-        this.progress = new Progress();
+        this.saveManagement = new SaveManagement();
 
         this.titleScreen = new TitleScreen({
-            progress: this.progress
+            saveManagement: this.saveManagement
         });
         const useSaveFile = await this.titleScreen.init(container);
 
         let initalState = null;
         if (useSaveFile) {
-            this.progress.load();
+            this.saveManagement.load();
             initalState = {
-                cutsceneSpaces: this.progress.cutsceneSpaces,
-                enemyInfo: this.progress.enemyInfo,
-                enemyPos: this.progress.enemyPos,
-                enemyIsDead: this.progress.enemyIsDead,
-                heroPos: this.progress.heroPos,
+                cutsceneSpaces: this.saveManagement.cutsceneSpaces,
+                enemyInfo: this.saveManagement.enemyInfo,
+                enemyPos: this.saveManagement.enemyPos,
+                enemyIsDead: this.saveManagement.enemyIsDead,
+                heroPos: this.saveManagement.heroPos,
             }
         }
 

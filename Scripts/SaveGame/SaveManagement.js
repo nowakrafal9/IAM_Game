@@ -1,5 +1,5 @@
 /*
-    Klasa Progress odpowiedzialna za zarządzanie systemem zapisu postępu gry
+    Klasa SaveManagement odpowiedzialna za zarządzanie systemem zapisu postępu gry
 
     * save()
         Funkcja zapisu gry. Wykorzystuje localStorage przeglądarki do przechowania zapisu
@@ -13,7 +13,7 @@
     * load()
         Funkcja wczytująca zapis
 */
-class Progress {
+class SaveManagement {
     constructor() {
         this.cutsceneSpaces = null;
         this.enemyInfo = null;
