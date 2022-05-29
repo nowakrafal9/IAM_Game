@@ -1,5 +1,5 @@
 .KeyboardMenu {
-    border: 1px solid var(--border-color);
+    /* border: 1px solid var(--border-color); */
     background: var(--menu-background);
     position: absolute;
 }
