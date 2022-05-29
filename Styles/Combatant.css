@@ -9,14 +9,6 @@
     transform: scale(1.5);
 }
 
-.Battle .Combatant[data-active="false"] {
-    opacity: 0;
-}
-
-.Battle .Combatant[data-active="false"] {
-    opacity: 1;
-}
-
 .Combatant[data-team="player"] {
     top: 25px;
     left: 25px;

@@ -1,4 +1,6 @@
+//Wszystkie dostępne animacje
 window.BattleAnimations = {
+    // Animacja ataku
     async attack(event, onComplete) {
         event.caster.objectRef.isMakingTurnAction = true;
         event.caster.objectRef.sprite.setTurnAnimation("fastAttack");
@@ -12,6 +14,7 @@ window.BattleAnimations = {
         onComplete();
     },
 
+    // Animacja otrzymania obrażeń przez postać
     async hit(event, onComplete) {
         event.target.objectRef.isMakingTurnAction = true;
         event.target.objectRef.sprite.setTurnAnimation("hurt");
@@ -32,6 +35,7 @@ window.BattleAnimations = {
         onComplete();
     },
 
+    // Animacja śmierci postaci
     async death(event, onComplete) {
         event.caster.objectRef.isMakingTurnAction = true;
         event.caster.objectRef.sprite.setTurnAnimation("hurt");

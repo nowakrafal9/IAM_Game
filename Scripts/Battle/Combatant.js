@@ -1,3 +1,30 @@
+/*
+    Klasa Combatant odpowiedzialna za obsługę kombatantów walczących w bitwie
+
+    * get hpPercent() 
+        Getter zwracający procentową wartość punktów zdrowia
+    
+    * get xpPercent() 
+        Getter zwracający procentową wartość punktów doświadczenia
+
+    * get givesXp() 
+        Getter zwracający ilość punktów doświadczenia uzyskaną za zabicie przeciwnika  
+
+    * createElement()
+        Funcja przygotująca pasek informacji o kombatancie
+
+    * update()
+        Funkcja aktualizująca pasek informacji o kombatancie
+
+    * getStatusEevents()
+        Funkcja zwracająca zdarzenia związane z aktywnymi statusami
+
+    * statusTurnDecrement()
+        Funkcja zmniejszająca ilość pozostałych tur działania statusu
+
+    * init()
+        Funckja inicjalizjąca kombatanta
+*/
 class Combatant {
     constructor(config, battle) {
         Object.keys(config).forEach(key => {
@@ -16,10 +43,6 @@ class Combatant {
         return this.xp / this.maxXp * 100;
     }
 
-    get isActive() {
-        return this.battle?.activeCombatants[this.team] === this.id;
-    }
-
     get givesXp() {
         return this.killXp ? (this.killXp * this.level) : 0;
     }
@@ -27,7 +50,6 @@ class Combatant {
     createElement() {
         this.hudElement = document.createElement("div");
         this.hudElement.classList.add("Combatant");
-        this.hudElement.setAttribute("data-combatant", this.id);
         this.hudElement.setAttribute("data-team", this.team);
 
         this.hudElement.innerHTML = (`
@@ -69,7 +91,7 @@ class Combatant {
         }
     }
 
-    getPostEevents() {
+    getStatusEevents() {
         if (this.status?.type === "Regeneration") {
             return [
                 { type: "textMessage", text: "I feel power!!!" },

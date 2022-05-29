@@ -1,3 +1,16 @@
+/*
+    Klasa Battle odpowiedzialna za system bitw.
+
+    * addCombatant()
+        Funkcja dodania kombatanta do bitwy. Wewnątrz funkcji następuje przypisanie
+        obiektów reprezentujących kombatantów to tablicy combatants
+
+    * createElement()
+        Funcja przygotująca ekran bitwy
+
+    * init()
+        Funckja inicjalizjąca bitwe
+*/
 class Battle {
     constructor(config) {
         this.map = config.map;
@@ -25,7 +38,7 @@ class Battle {
         this.addCombatant("hero", "player", this.playerInstance);
         this.addCombatant(this.enemy.name, "enemy", this.enemyInstance);
 
-        //Add player items
+        //Dodanie do bitwy przedmiotów gracza
         window.player.items.forEach(item => {
             this.items.push({
                 ...item,
@@ -33,8 +46,10 @@ class Battle {
             })
         })
 
+        //Tablica przedmiotów użytych podczas bitwy
         this.usedInstanceIds = {};
 
+        //Ukrycie elementów interfejsu globalnego
         this.hudElement = document.getElementById("Hud");
         this.hudElement.classList.add("HideHud");
     }
@@ -60,6 +75,7 @@ class Battle {
     }
 
     createElement() {
+        //Stworzenie elementu div oraz dodanie do niego klasy Battle
         this.element = document.createElement("div");
         this.element.classList.add("Battle");
     }
@@ -68,12 +84,14 @@ class Battle {
         this.createElement();
         container.appendChild(this.element);
 
+        //Inicjalizacja wszystkich kombatantów
         Object.keys(this.combatants).forEach(key => {
             let combatant = this.combatants[key];
             combatant.id = key;
             combatant.init(this.element);
         })
 
+        //Utworzenie nowego obiektu TurnCycle zarządzającego akcjami podczas tury
         this.turnCycle = new TurnCycle({
             battle: this,
             onNewEvent: event => {
@@ -83,8 +101,12 @@ class Battle {
                 })
             },
             onWinner: winner => {
+                //Akcje wykonane po skończonej bitwie    
+
+                //Zmiana flagi bohatera w celu uniknięcia ponowienia bitwy w pokoju
                 player.flags["START_BATTLE"] = false;
 
+                //Zmiana animacji postaci na te spoza walki
                 Object.keys(this.combatants).forEach(key => {
                     let combatant = this.combatants[key];
                     combatant.objectRef.isInBattle = false;
@@ -93,7 +115,9 @@ class Battle {
                 const playerState = window.player;
                 const combatant = this.combatants["hero"];
 
-                //Manage save files after battle
+                //Zarządzenie zapisem po walce
+                //w przypadku przegranej: zapis jest usuwany
+                //w przypadku wygranej: nadpisanie go
                 if (winner === "enemy") {
                     this.progress.deleteSave();
                     this.map.startCutscene([
@@ -103,14 +127,14 @@ class Battle {
                     this.progress.save(this.map);
                 }
 
-                //Change player state after battle
+                //Zapisanie statystyk bohatera po walce w globalnym stanie bohatera
                 playerState.playerInstance.hero.hp = combatant.hp;
                 playerState.playerInstance.hero.maxHp = combatant.maxHp;
                 playerState.playerInstance.hero.xp = combatant.xp;
                 playerState.playerInstance.hero.maxXp = combatant.maxXp;
                 playerState.playerInstance.hero.level = combatant.level;
 
-                //Remove used items from player state
+                //Usunięcie użytych przedmiotów z globalnego stanu bohatera
                 playerState.items = playerState.items.filter(item => {
                     return !this.usedInstanceIds[item.instanceId]
                 });

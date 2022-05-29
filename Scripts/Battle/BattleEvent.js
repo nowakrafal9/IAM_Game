@@ -1,3 +1,24 @@
+/*
+    Klasa BattleEvent odpowiedzialna za zdarzenia w trakcie bitwy.
+
+    * textMessage()
+        Funkcja odpowiedzialna za wyświetlenia wiadomości. 
+
+    * stateChange()
+        Asynchroniczna funkcja obsługująca wszelkie zmiany stanu kombatanta.
+
+    * submissionMenu()
+        Funckja odpowiedzalna za wybranie akcji z menu wyboru.
+
+    * giveXp()
+        Funkcja odpowiadająca za rozdanie punktów doświadczenia po ukończonej bitwie
+
+    * animation()
+        Funkcja wywołująca odpowiednią animacje
+
+    * init()
+        Funckja inicjalizjąca zdarzenie
+*/
 class BattleEvent {
     constructor(event, battle) {
         this.event = event;
@@ -5,11 +26,13 @@ class BattleEvent {
     }
 
     textMessage(resolve) {
+        //Podmiana tekstu jeżeli zamiennik istnieje
         const text = this.event.text
             .replace("{CASTER}", this.event.caster?.name)
             .replace("{TARGET}", this.event.target?.name)
             .replace("{ACTION}", this.event.action?.name)
 
+        //Utworzenie nowego obiektu TextMessage zarządzającego wyświetleniem wiadomości
         const message = new TextMessage({
             text,
             onComplete: () => {
@@ -20,9 +43,13 @@ class BattleEvent {
     }
 
     async stateChange(resolve) {
+        //Wyodrębnienie parametrów przesyłanych w zmiennej event
         const { caster, target, damage, statusDamage, recover, status, fireStatus } = this.event;
+        //Ustawienie postaci wobec której nastąpią zmiany. Jeżeli przesłano zmienną onCaster o wartości true to
+        //zmienna who = caster, w przeciwnym razie who = target
         let who = this.event.onCaster ? caster : target;
 
+        //Zadanie obrażeń bezpośrednich
         if (damage) {
             let damageDealt = 0;
             if (caster === who) {
@@ -40,6 +67,7 @@ class BattleEvent {
             })
         }
 
+        //Zadanie obrażeń ze statusu
         if (statusDamage) {
             let sDamage = statusDamage;
             if (fireStatus) {
@@ -51,6 +79,7 @@ class BattleEvent {
             })
         }
 
+        //Leczenie postaci
         if (recover) {
             let newHp = who.hp + recover;
 
@@ -63,6 +92,7 @@ class BattleEvent {
             })
         }
 
+        //Nałożenie/usunięcie statusu
         if (status) {
             who.update({
                 status: { ...status }
@@ -80,6 +110,7 @@ class BattleEvent {
     }
 
     submissionMenu(resolve) {
+        //Utworzenie nowego obiektu SubmissionMenu zarządzającego menu wyboru akcji
         const menu = new SubmissionMenu({
             caster: this.event.caster,
             enemy: this.event.enemy,
@@ -95,6 +126,7 @@ class BattleEvent {
         let amount = this.event.xp;
         const { combatant } = this.event;
 
+        //Animacja rośnięcia paska doświadczenia
         const step = () => {
             if (amount > 0) {
                 if (amount > 1000) {
@@ -111,6 +143,7 @@ class BattleEvent {
                     combatant.xp += 5;
                 }
 
+                //Zwiększenia poziomu po osiągniąciu odpowiedniej ilości punktów doświadczenia
                 if (combatant.xp >= combatant.maxXp) {
                     combatant.xp = combatant.maxXp - combatant.xp;
                     combatant.level += 1;
@@ -132,8 +165,8 @@ class BattleEvent {
     }
 
     animation(resolve) {
-        const fn = BattleAnimations[this.event.animation];
-        fn(this.event, resolve);
+        const animation = BattleAnimations[this.event.animation];
+        animation(this.event, resolve);
     }
 
     init(resolve) {

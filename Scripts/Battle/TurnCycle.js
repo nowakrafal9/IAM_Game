@@ -1,3 +1,9 @@
+/*
+    Klasa TurnCycle odpowiedzialna za obsługę tury walki
+
+    * turn() 
+        Funkcja tury
+*/
 class TurnCycle {
     constructor({ battle, onNewEvent, onWinner }) {
         this.battle = battle;
@@ -43,10 +49,10 @@ class TurnCycle {
         }
 
         //Status effects after turn
-        const postEvents = caster.getPostEevents();
-        for (let i = 0; i < postEvents.length; i++) {
+        const statusEvents = caster.getStatusEevents();
+        for (let i = 0; i < statusEvents.length; i++) {
             const event = {
-                ...postEvents[i],
+                ...statusEvents[i],
                 submission,
                 action: submission.action,
                 caster,
