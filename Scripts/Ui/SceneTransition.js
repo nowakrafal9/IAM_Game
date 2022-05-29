@@ -2,7 +2,7 @@
     Klasa SceneTransition odpowiedzialna za efekt wygaszenia podczas przechodzenia między poziomami
 
     * createElement()
-        Funcja przygotująca interfejs gracza
+        Funcja przygotująca efekt przejścia
 
     *fadeOut()
         Funkcja odpowiedzialna za wywołanie animacji wygaśnięcia

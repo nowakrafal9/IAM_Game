@@ -5,7 +5,7 @@
         Funcja przygotująca wiadomość
 
     * done()
-        Funkcja odpowiedzialna za przyśpieszenie wyświetlania tekstu oraz zamknięcie go
+        Funkcja odpowiedzialna za przyśpieszenie wyświetlania tekstu lub zamknięcie go
 
     * init()
         Funckja inicjalizjąca wiadomość

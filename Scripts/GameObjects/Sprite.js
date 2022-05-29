@@ -1,5 +1,5 @@
 /*
-    Klasa Sprite odpowiedzialna za zarządzanie animacjami
+    Klasa Sprite odpowiedzialna za rysowanie obiektów
 
     * get frame()
         Getter otrzymujący aktualną klatke animacji

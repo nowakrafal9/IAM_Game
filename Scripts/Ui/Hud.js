@@ -5,7 +5,7 @@
         Funkcja odpowiedzialna za aktualizacje interfejsu
 
     * createElement()
-        Funcja przygotująca interfejs gracza
+        Funcja przygotowująca interfejs gracza
 
     * init()
         Funkcja inicjalizująca interfejs gracza
