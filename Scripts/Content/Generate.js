@@ -1,3 +1,4 @@
+//Funkcje generowania postaci
 const generateCharacters = {
     generateHero() {
         return new Person({
@@ -66,6 +67,7 @@ const generateCharacters = {
     }
 }
 
+//Funkcja generowania zdarzenia bitwy
 const generateEvents = {
     generateBattle(who) {
         let events = [

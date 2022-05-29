@@ -1,3 +1,12 @@
+/*
+    Klasa DirectionInput odpowiedzialna za nasłuchiwanie klawiszy kierunku - strzałka w lewo/prawo
+
+    * get direction()
+        Getter zwracający tablice przechowującą informacje o przyciśniętych przyciskach
+
+    * init()
+        Funkcja inicjalizacji nasłuchu
+*/
 class DirectionInput {
     constructor() {
         this.heldDirections = [];

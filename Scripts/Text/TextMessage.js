@@ -1,3 +1,15 @@
+/*
+    Klasa TextMessage odpowiedzialna za system wyświetlania wiadomości.
+
+    * createElement()
+        Funcja przygotująca wiadomość
+
+    * done()
+        Funkcja odpowiedzialna za przyśpieszenie wyświetlania tekstu oraz zamknięcie go
+
+    * init()
+        Funckja inicjalizjąca wiadomość
+*/
 class TextMessage {
     constructor({ text, onComplete }) {
         this.text = text;

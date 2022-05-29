@@ -121,7 +121,6 @@ class SubmissionMenu {
 
     init(container) {
         if (this.caster.isPlayerControlled) {
-            //Show UI if player turn
             this.showMenu(container);
         } else {
             this.decide();

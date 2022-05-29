@@ -1,3 +1,18 @@
+/*
+    Klasa Progress odpowiedzialna za zarządzanie systemem zapisu postępu gry
+
+    * save()
+        Funkcja zapisu gry. Wykorzystuje localStorage przeglądarki do przechowania zapisu
+
+    * deleteSave()
+        Funkcja usunięcia zapisu
+
+    * getSaveFile()
+        Funkcja znajdująca zapis w localStorage
+
+    * load()
+        Funkcja wczytująca zapis
+*/
 class Progress {
     constructor() {
         this.cutsceneSpaces = null;

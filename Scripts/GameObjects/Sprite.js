@@ -1,19 +1,43 @@
+/*
+    Klasa Sprite odpowiedzialna za zarządzanie animacjami
+
+    * get frame()
+        Getter otrzymujący aktualną klatke animacji
+
+    * setAnimation()
+        Funckja ustawiająca aktywną animacje
+
+    * setTurnAnimation()
+        Funckja ustawiająca aktywną animacje poczas tury postaci
+
+    * updateAnimationProgress()
+        Funkcja aktualizujaca postęp animacji
+
+    * draw()
+        Funkcja rysująca obiekt
+*/
 class Sprite {
     constructor(config) {
-        //Loading the image
+        //Załadowanie obrazków
         this.image = new Image();
         this.image.src = config.src;
         this.image.onload = () => {
             this.isLoaded = true;
         }
 
+        //Ustawienie rozmiaru cięcia
         this.sizeX = config.sizeX || 0;
         this.sizeY = config.sizeY || 0;
 
+        //Referencja do obiektu
+        this.gameObject = config.gameObject;
+
+        //Animacja podczas tury, nie powtarza się
         this.turnAnimation = false;
 
-        //Animation and inital state
+        //Ustawienie animacji
         this.animations = null;
+        //Obiekt jest instancją klasy Person
         if (config.gameObject instanceof Person) {
             this.animations = config.animations || {
                 "idle-NoFight-right": [[0, 0], [1, 0], [2, 0], [3, 0]],
@@ -31,6 +55,7 @@ class Sprite {
                 "stay-dead": [[5, 9]]
             }
         }
+        //Obiekt jest instancją klasy EnemySlime
         if (config.gameObject instanceof EnemySlime) {
             this.animations = config.animations || {
                 "idle-NoFight": [[0, 0], [1, 0], [2, 0], [3, 0]],
@@ -53,9 +78,6 @@ class Sprite {
         this.animationFrameLimit = config.animationFrameLimit || 10;
         this.attackFrameLimit = config.attackFrameLimit || 5;
         this.animationFrameProgress = this.animationFrameLimit;
-
-        //Reference the game object
-        this.gameObject = config.gameObject;
     }
 
     get frame() {
