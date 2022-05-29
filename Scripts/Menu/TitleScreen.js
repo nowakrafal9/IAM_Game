@@ -1,3 +1,18 @@
+/*
+    Klasa TitleScreen odpowiedzialna za ekran tytułowy.
+
+    * getOptions()
+        Funkcja zwracająca opcje do menu
+
+    * createElement()
+        Funcja przygotująca menu
+
+    * close()
+        Funkcja zamykająca ekran tytułowy
+
+    * init()
+        Funkcja inicjalizująca
+*/
 class TitleScreen {
     constructor({ progress }) {
         this.progress = progress;

@@ -1,13 +1,26 @@
+/*
+    Klasa EnemySlime dziedzicząca po GameObject odpowiedzialna za zarządzanie rysowanymi przeciwnikami
+
+    * update()
+        Funkcja odpowiedzialna za wprowadzenie zmian w obiekcie
+
+    * startBehavior()
+        Funkcja obsługująca wywołane zachowania obiektu
+
+    * updatePosition()
+        Funkcja obsługująca zmiane koordynatów obiektu
+
+    * updateSprite()
+        Funkcja obsługująca zmiane animacji obiektu
+
+    * scaleEnemy()
+        Funkcja zmieniająca statystyki przeciwnika zależnie od poziomu
+*/
 class EnemySlime extends GameObject {
     constructor(config) {
         super(config);
 
         this.movingProgressRemaining = 0;
-        this.isStanding = false;
-        this.isInBattle = false;
-        this.isMakingTurnAction = false;
-        this.isDead = false;
-
         this.directionUpdate = {
             "left": ["x", -2],
             "right": ["x", 2],
@@ -30,7 +43,7 @@ class EnemySlime extends GameObject {
             this.updateSprite(state);
         }
 
-        if (behavior.type === "long_walk") {
+        if (behavior.type === "longWalk") {
             this.movingProgressRemaining = 30;
             this.updateSprite(state);
         }
@@ -58,7 +71,7 @@ class EnemySlime extends GameObject {
         }
     }
 
-    updateSprite(state) {
+    updateSprite() {
         if (!this.isDead) {
             if (this.movingProgressRemaining > 0) {
                 this.sprite.setAnimation("walk-left");

@@ -1,5 +1,6 @@
+//Wszystkie akcje oraz przedmioty dostępne podczas bitwy
 window.Actions = {
-    // Attack types
+    // Typy ataków
     FastAttack: {
         name: "Fast attack",
         description: "Attack as swift as a wind",
@@ -100,37 +101,7 @@ window.Actions = {
         ],
     },
 
-    // Statuses
-    regenerationStatus: {
-        name: "Regeneration",
-        targetType: "friendly",
-        success: [
-            { type: "textMessage", text: "{CASTER} uses {ACTION}" },
-            {
-                type: "stateChange",
-                status: {
-                    type: "regeneration",
-                    expiresIn: 3
-                }
-            },
-        ]
-    },
-    stunStatus: {
-        name: "Stun",
-        success: [
-            { type: "textMessage", text: "{CASTER} uses {ACTION}" },
-            {
-                type: "stateChange",
-                status: {
-                    type: "stun",
-                    expiresIn: 2
-                }
-            },
-            { type: "textMessage", text: "{TARGET} can't see too well" },
-        ]
-    },
-
-    // Items
+    // Przedmioty
     item_healthPotionSmall: {
         name: "Recovery potion(S)",
         description: "Small potion giving 20 hp",

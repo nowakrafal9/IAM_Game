@@ -1,3 +1,15 @@
+/*
+    Klasa Hud odpowiedzialna za zarządzanie interfejsem użytkownika
+
+    * update()
+        Funkcja odpowiedzialna za aktualizacje interfejsu
+
+    * createElement()
+        Funcja przygotująca interfejs gracza
+
+    * init()
+        Funkcja inicjalizująca interfejs gracza
+*/
 class Hud {
     constructor() {
         this.hudElement = null;

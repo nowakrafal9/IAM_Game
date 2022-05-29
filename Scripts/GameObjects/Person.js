@@ -1,13 +1,25 @@
+/*
+    Klasa Person dziedzicząca po GameObject odpowiedzialna za zarządzanie rysowanymi postaciami
+
+    * update()
+        Funkcja odpowiedzialna za wprowadzenie zmian w obiekcie
+
+    * startBehavior()
+        Funkcja obsługująca wywołane zachowania obiektu
+
+    * updatePosition()
+        Funkcja obsługująca zmiane koordynatów obiektu
+
+    * updateSprite()
+        Funkcja obsługująca zmiane animacji obiektu
+*/
 class Person extends GameObject {
     constructor(config) {
         super(config);
-        this.movingProgressRemaining = 0;
-        this.isStanding = false;
-        this.isInBattle = false;
-        this.isMakingTurnAction = false;
-        this.isDead = false;
+
         this.objectType = config.objectType;
 
+        this.movingProgressRemaining = 0;
         this.directionUpdate = {
             "left": ["x", -2],
             "right": ["x", 2],
@@ -18,7 +30,11 @@ class Person extends GameObject {
         if (this.movingProgressRemaining > 0) {
             this.updatePosition();
         } else {
-            // Move if key pressed
+            //Porusz postać jeżeli:
+            //- nie ma aktywnego przerywnika filmowego
+            //- wciśnięto przycisk
+            //- obiekt jest sterowany przez gracza
+            //- obiekt żyje
             if (!state.map.isCutscenePlaying && state.arrow && this.objectType == "Player" && !this.isDead) {
                 this.startBehavior(state, {
                     type: "walk",
@@ -37,7 +53,7 @@ class Person extends GameObject {
             this.updateSprite(state);
         }
 
-        if (behavior.type === "long_walk") {
+        if (behavior.type === "longWalk") {
             this.movingProgressRemaining = 30;
             this.updateSprite(state);
         }
@@ -65,7 +81,7 @@ class Person extends GameObject {
         }
     }
 
-    updateSprite(state) {
+    updateSprite() {
         if (!this.isDead) {
             if (this.movingProgressRemaining > 0) {
                 this.sprite.setAnimation("walk-" + this.direction);

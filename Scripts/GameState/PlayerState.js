@@ -1,3 +1,6 @@
+/*
+    Klasa PlayerState reprezentująca globalny stan gracza
+*/
 class PlayerState {
     constructor() {
         this.playerInstance = {

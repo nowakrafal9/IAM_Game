@@ -1,3 +1,9 @@
+/*
+    Klasa KeyPressListener odpowiedzialna za nasłuchiwanie klawiszy
+
+    * unbind()
+        Funkcja wyłączająca nasłuch
+*/
 class KeyPressListener {
     constructor(keyCode, callback) {
         let keySafe = true;

@@ -1,3 +1,15 @@
+/*
+    Klasa RevealingText odpowiedzialna za efekt pisania tekstu litera po literze.
+
+    * revealOneCharacter()
+        Funcja wyświetlająca litere
+
+    * warpToDone()
+        Funkcja przyśpieszająca wyświetlenie wiadomości
+
+    * init()
+        Funckja inicjalizjąca
+*/
 class RevealingText {
     constructor(config) {
         this.element = config.element;

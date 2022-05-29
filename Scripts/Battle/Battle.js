@@ -139,8 +139,10 @@ class Battle {
                     return !this.usedInstanceIds[item.instanceId]
                 });
 
+                //Ogłoszenie zdarzenia aktualizacji stanu gracza
                 utils.emitEvent("PlayerStateUpdated");
 
+                //Ponowne pojawienie się elementów interfejsu globalnego
                 this.hudElement.classList.remove("HideHud");
 
                 this.element.remove();

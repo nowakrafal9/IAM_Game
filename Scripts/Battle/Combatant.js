@@ -92,13 +92,6 @@ class Combatant {
     }
 
     getStatusEevents() {
-        if (this.status?.type === "Regeneration") {
-            return [
-                { type: "textMessage", text: "I feel power!!!" },
-                { type: "stateChange", recover: 5, onCaster: true }
-            ]
-        }
-
         if (this.status?.type === "Poison") {
             let damageDealt = (Math.floor(this.maxHp * 0.10));
 

@@ -1,4 +1,4 @@
-//Wszystkie dostępne animacje
+//Wszystkie animacje dostępne podczas bitwy
 window.BattleAnimations = {
     // Animacja ataku
     async attack(event, onComplete) {

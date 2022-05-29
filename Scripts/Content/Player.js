@@ -1,3 +1,4 @@
+//Wszystkie rodzaje postaci jakimi można grać, ich ikony bitwy oraz akcje
 window.PlayerTypes = {
     adventurer: "adventurer",
 }
