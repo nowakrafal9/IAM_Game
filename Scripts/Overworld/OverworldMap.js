@@ -18,8 +18,6 @@ class OverworldMap {
         Object.keys(this.gameObjects).forEach(key => {
             let object = this.gameObjects[key];
             object.id = key;
-
-            object.mount(this);
         })
     }
 
