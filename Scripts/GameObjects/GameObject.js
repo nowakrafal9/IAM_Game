@@ -1,12 +1,23 @@
+/*
+    Klasa GameObject odpowiedzialna za zarządzanie rysowanymi obiektami
+
+    * update()
+        Funkcja odpowiedzialna za wprowadzenie zmian w obiekcie
+*/
 class GameObject {
     constructor(config) {
+        //Identyfikator obiektu, domyślnie null
         this.id = null;
+
+        //Koordynaty obiektu, jeżeli nie przekazano ich to domyślnie przyjmują wartość 0
         this.x = config.x || 0;
         this.y = config.y || 0;
 
+        //Kierunek i typ obiektu. Jeżeli nieprzekazane to przyjmują domyślne wartości 'right' i null
         this.direction = config.direction || "right";
         this.objectType = config.objectType || null;
 
+        //Utworzenie nowego sprite'a
         this.sprite = new Sprite({
             gameObject: this,
             src: config.src,
@@ -15,39 +26,9 @@ class GameObject {
             sizeY: config.sizeY,
         });
 
-        this.behaviorLoop = config.behaviorLoop || [];
-        this.behaviorLoopIndex = 0;
-    }
-
-    mount(map) {
-        this.isMounted = true;
-
-        setTimeout(() => {
-            this.doBehaviorEvent(map);
-        }, 10)
-    }
-
-    update() { }
-
-    async doBehaviorEvent(map) {
-        if (map.isCutscenePlaying || this.behaviorLoop.length === 0 || this.isStanding) {
-            return;
-        }
-
-        //Setting up our event with relevant info
-        let eventConfig = this.behaviorLoop[this.behaviorLoopIndex];
-        eventConfig.who = this.id;
-
-        //Create an event instance out of next event config
-        const eventHandler = new OverworldEvent({ map, event: eventConfig });
-        await eventHandler.init();
-
-        //Setting the next event to fire
-        this.behaviorLoopIndex += 1;
-        if (this.behaviorLoopIndex === this.behaviorLoop.length) {
-            this.behaviorLoopIndex = 0;
-        }
-
-        this.doBehaviorEvent(map);
+        this.isStanding = false;
+        this.isInBattle = false;
+        this.isMakingTurnAction = false;
+        this.isDead = false;
     }
 }
