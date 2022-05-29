@@ -1,8 +1,18 @@
 /*
-    Klasa TurnCycle odpowiedzialna za obsługę tury walki
+    Klasa TurnCycle odpowiedzialna za obsługę cyklu tur walki
 
     * turn() 
-        Funkcja tury
+        Asynchroniczna funkcja tury
+
+    * getXpFromEnemy()
+        Asynchroniczna funckja pobrania punktów doświadczenia po wygranej bitwie
+
+    * getWinningSide()
+        Funckja sprawdzająca czy któraś z postaci ilość puktów życia
+        mniejszą lub równą 0
+
+    * init()
+        Funckja inicjalizjąca ture
 */
 class TurnCycle {
     constructor({ battle, onNewEvent, onWinner }) {
@@ -14,7 +24,7 @@ class TurnCycle {
     }
 
     async turn() {
-        //Get the caster
+        //Pobranie czyja jest tura
         const casterId = this.battle.activeCombatants[this.currentTeam];
         const caster = this.battle.combatants[casterId];
 
@@ -34,6 +44,7 @@ class TurnCycle {
         }
 
 
+        //Powodzenie lub niepowodzenie akcji, obecnie akcja zawsze się powodzi
         const resultingEvents = submission.action.success;
         // const resultingEvents = submission.action.failure;
 
@@ -48,7 +59,7 @@ class TurnCycle {
             await this.onNewEvent(event);
         }
 
-        //Status effects after turn
+        //Działanie statusów aktywnych na postaci
         const statusEvents = caster.getStatusEevents();
         for (let i = 0; i < statusEvents.length; i++) {
             const event = {
@@ -61,13 +72,13 @@ class TurnCycle {
             await this.onNewEvent(event);
         }
 
-        //Check for status expire
+        //Zmiana czasu pozostałego na działanie statusu i usunięcie statusu jeżeli minął
         const expiredEvent = caster.statusTurnDecrement();
         if (expiredEvent) {
             await this.onNewEvent(expiredEvent);
         }
 
-        //Check if there's a winner
+        //Sprawdzenie czy ktoś wygrał walke
         const winner = this.getWinningSide();
         if (winner) {
             if (winner === "player") {
@@ -98,24 +109,6 @@ class TurnCycle {
 
             const playerActiveId = this.battle.activeCombatants.player;
             const xp = submission.target.givesXp;
-
-            await this.onNewEvent({
-                type: "textMessage",
-                text: `Gained ${xp} XP!`
-            })
-
-            await this.onNewEvent({
-                type: "giveXp",
-                xp,
-                combatant: this.battle.combatants[playerActiveId]
-            })
-        } else {
-            await this.onNewEvent({
-                type: "textMessage", text: `${caster.name} meets its end!`
-            })
-
-            const playerActiveId = this.battle.activeCombatants.player;
-            const xp = caster.givesXp;
 
             await this.onNewEvent({
                 type: "textMessage",
