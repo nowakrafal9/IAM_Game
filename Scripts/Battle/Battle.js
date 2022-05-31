@@ -124,15 +124,15 @@ class Battle {
                         { type: "gameOver" }
                     ])
                 } else {
+                    //Zapisanie statystyk bohatera po walce w globalnym stanie bohatera
+                    playerState.playerInstance.hero.hp = combatant.hp;
+                    playerState.playerInstance.hero.maxHp = combatant.maxHp;
+                    playerState.playerInstance.hero.xp = combatant.xp;
+                    playerState.playerInstance.hero.maxXp = combatant.maxXp;
+                    playerState.playerInstance.hero.level = combatant.level;
+
                     this.saveManagement.save(this.map);
                 }
-
-                //Zapisanie statystyk bohatera po walce w globalnym stanie bohatera
-                playerState.playerInstance.hero.hp = combatant.hp;
-                playerState.playerInstance.hero.maxHp = combatant.maxHp;
-                playerState.playerInstance.hero.xp = combatant.xp;
-                playerState.playerInstance.hero.maxXp = combatant.maxXp;
-                playerState.playerInstance.hero.level = combatant.level;
 
                 //Usunięcie użytych przedmiotów z globalnego stanu bohatera
                 playerState.items = playerState.items.filter(item => {
